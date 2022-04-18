@@ -249,6 +249,7 @@ m2=0..n
     </coordinates>
     <panel_attributes>Job
 --
+name : String
 </panel_attributes>
     <additional_attributes/>
   </element>
