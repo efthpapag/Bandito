@@ -13,7 +13,6 @@
 --
 first name : String
 last name : String
-address : String
 uuid : Srting
 password : String</panel_attributes>
     <additional_attributes/>
@@ -41,8 +40,8 @@ password : String</panel_attributes>
     </coordinates>
     <panel_attributes>Musician 
 --
-music genre : String
-is band member : Boolean</panel_attributes>
+is band member : Boolean
+address : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -95,7 +94,7 @@ occupied : Boolean</panel_attributes>
     </coordinates>
     <panel_attributes>Concert
 --
-date : LocalDateTime</panel_attributes>
+date : LocalDate</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -250,6 +249,7 @@ m2=0..n
     <panel_attributes>Job
 --
 name : String
+address : String
 </panel_attributes>
     <additional_attributes/>
   </element>

@@ -1,5 +1,10 @@
 package com.backend.bandtito.models;
 
-public class BandAdmin {
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "bandAdmins", schema = "public")
+public class BandAdmin extends Musician{
     
 }
