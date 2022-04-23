@@ -1,7 +1,5 @@
 package com.backend.bandtito.models;
 
-import java.util.Random;
-
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
@@ -11,9 +9,11 @@ import javax.persistence.Entity;
 @Table(name = "users", schema = "public")
 public class User {
 
+    //Columns
+
     @Id
-    @Column(name = "uuid", nullable = true)
-    private String uuid;
+    @Column(name = "username", nullable = true)
+    private String username;
 
     @Column(name = "firstname", nullable = true)
     private String firstname;
@@ -24,26 +24,21 @@ public class User {
     @Column(name = "password", nullable = true)
     private String password;
 
+    //Constructors
+
     public User() {
         
     }
 
-    public User(String firstname, String lastname, String password) {
-
-        int leftLimit = 48;
-        int rightLimit = 122;
-        int targetStringLength = 10;
-        Random random = new Random();
+    public User(String username,String firstname, String lastname, String password) {
 
         this.firstname = firstname;
         this.lastname = lastname;
-        this.uuid = random.ints(leftLimit, rightLimit + 1)
-        .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
-        .limit(targetStringLength)
-        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
-        .toString();
+        this.username = username;
         this.password = password;
     }
+
+    //Getters
 
     public String getFirstName(){
         return this.firstname;
@@ -53,12 +48,18 @@ public class User {
         return this.lastname;
     }
 
-    public String getuuid(){
-        return this.uuid;
+    public String getUsername(){
+        return this.username;
     }
 
     public String getPassword(){
         return this.password;
+    }
+
+    //toString
+
+    public String toString(){
+        return this.username;
     }
     
 }

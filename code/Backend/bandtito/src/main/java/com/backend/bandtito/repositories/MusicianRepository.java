@@ -1,8 +1,8 @@
 package com.backend.bandtito.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.backend.bandtito.models.BandAdmin;
+import com.backend.bandtito.models.Musician;
 
-public interface MusicianRepository extends JpaRepository<BandAdmin, String> {
-    BandAdmin findByUuid(String uuid);
-}
+/*public interface MusicianRepository extends JpaRepository<Musician, String> {
+    Musician findByUsername(String username);
+}*/

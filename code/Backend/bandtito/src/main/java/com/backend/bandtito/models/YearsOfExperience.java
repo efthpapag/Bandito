@@ -4,14 +4,14 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
+/*
 @Entity
 @Table(name = "yearsOfExperience", schema = "public")
 public class YearsOfExperience {
 
     @Id
     @Column(name = "numberOfYears", nullable = true)
-    private int numberOfYears;
+    private Integer numberOfYears;
 
     public YearsOfExperience() {
         
@@ -29,4 +29,4 @@ public class YearsOfExperience {
         this.numberOfYears = numberOfYears;
     }
     
-}
+}*/

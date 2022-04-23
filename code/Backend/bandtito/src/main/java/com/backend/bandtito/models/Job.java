@@ -1,13 +1,22 @@
 package com.backend.bandtito.models;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "jobs", schema = "public")
 public class Job {
+
+    //Columns
 
     @Id
     @Column(name = "name", nullable = true)
@@ -16,14 +25,27 @@ public class Job {
     @Column(name = "address", nullable = true)
     private String address;
 
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "username", nullable = false)
+    private Employer employer;
+
+    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY,
+    cascade = CascadeType.ALL)
+    private Set<Concert> concerts;
+
+    //Constructors
+
     public Job() {
         
     }
 
-    public Job(String name, String address) {
+    public Job(String name, String address, Employer employer) {
         this.name = name;
         this.address = address;
+        this.employer = employer;
     }
+
+    //Getters
 
     public String getName(){
         return this.name;
@@ -39,6 +61,12 @@ public class Job {
 
     public void getAddress(String address){
         this.address = address;
+    }
+
+    //toString
+
+    public String toString(){
+        return this.name;
     }
     
 }

@@ -9,9 +9,13 @@ import javax.persistence.Table;
 @Table(name = "musicGenre", schema = "public")
 public class MusicGenre {
 
+    //Columns
+
     @Id
     @Column(name = "name", nullable = true)
     private String name;
+
+    //Constructors
 
     public MusicGenre() {
         
@@ -21,7 +25,15 @@ public class MusicGenre {
         this.name = name;
     }
 
+    //Getters
+
     public String getName(){
+        return this.name;
+    }
+
+    //toString
+
+    public String toString(){
         return this.name;
     }
     
