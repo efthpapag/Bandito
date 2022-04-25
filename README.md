@@ -47,11 +47,11 @@ A social networking application with the purpose to help musicians form bands an
 
 ![Search Activity Diagram](docs/Search.png)
 
-##Note
+## Note
 For this project to work correctly on your pc you must create a application.properties with your postgr
  server username and password in Bandito\code\Backend\bandtito\src\main\resources
-(resources folder does not exist it must also be created).<br />
-For example<br />
+(resources folder does not exist it must also be created).For example <br />
+
 server.port=9090
 spring.datasource.url= jdbc:postgresql://localhost:5432/Bandito
 spring.datasource.username= postgres
