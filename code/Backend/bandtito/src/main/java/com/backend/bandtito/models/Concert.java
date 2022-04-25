@@ -30,7 +30,7 @@ public class Concert {
     private LocalDate date;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "jab_name", nullable = false)
+    @JoinColumn(name = "job_name", nullable = false)
     private Job job;
 
     @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
@@ -65,9 +65,17 @@ public class Concert {
     public LocalDate getDate(){
         return this.date;
     }
-    
+
+    public Job getJob(){
+        return this.job;
+    }
+
     public Set<MusicGenre> getMusicGenres(){
         return this.musicGenres;
+    }
+
+    public String getUuid(){
+        return this.uuid;
     }
 
     //toString
@@ -75,5 +83,4 @@ public class Concert {
     public String toString(){
         return this.uuid;
     }
-    
 }

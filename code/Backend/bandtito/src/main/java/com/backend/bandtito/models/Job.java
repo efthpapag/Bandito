@@ -54,17 +54,23 @@ public class Job {
     public String getAddress(){
         return this.address;
     }
-
-    public void getName(String name){
-        this.name = name;
-    }
-
-    public void getAddress(String address){
-        this.address = address;
+    
+    public Employer getEmployer(){
+        return this.employer;
     }
 
     public Set<Concert> getConcerts(){
         return this.concerts;
+    }
+
+    //Setters
+
+    public void setName(String name){
+        this.name = name;
+    }
+
+    public void setAddress(String address){
+        this.address = address;
     }
 
     //toString

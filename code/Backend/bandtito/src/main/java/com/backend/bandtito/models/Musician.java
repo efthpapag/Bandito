@@ -48,10 +48,12 @@ public class Musician extends User{
         
     }
 
-    public Musician(String username, String firstname, String lastname, String password, String address) {
+    public Musician(String username, String firstname, String lastname, String password, String address, Set<Instument> instuments, Set<MusicGenre> musicGenres) {
         super(username, firstname, lastname, password);
         this.address = address;
         this.isBandMember = false;
+        this.instuments = instuments;
+        this.musicGenres = musicGenres;
     }
 
     //Getters
@@ -67,6 +69,14 @@ public class Musician extends User{
     public Band getAdminOfBand(){
         return this.adminOfBand;
     }
+
+    public Set<Instument> getInstuments(){
+        return this.instuments;
+    }
+
+    public Set<MusicGenre> getMusicGenres(){
+        return this.musicGenres;
+    }
     
     //Setters
 
@@ -78,4 +88,17 @@ public class Musician extends User{
         this.isBandMember = isBandMember;
     }
 
+    //Other
+
+    public void addInstument(Instument instument){
+        this.instuments.add(instument);
+    }
+
+    public void addMusicGenre(MusicGenre musicGenre){
+        this.musicGenres.add(musicGenre);
+    }
+
+    public void removeMusicGenre(MusicGenre musicGenre){
+        this.musicGenres.remove(musicGenre);
+    }
 }

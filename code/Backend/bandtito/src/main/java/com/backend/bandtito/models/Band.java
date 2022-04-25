@@ -64,8 +64,16 @@ public class Band {
         return this.address;
     }
 
+    public Musician getAdmin(){
+        return this.admin;
+    }
+
     public Set<BandPosition> getBandPositions(){
         return this.bandPositions;
+    }
+
+    public Set<MusicGenre> getMusicGenres(){
+        return this.musicGenres;
     }
 
     //Setters
@@ -84,4 +92,13 @@ public class Band {
         return this.name;
     }
 
+    //Other
+
+    public void addMusicGenre(MusicGenre musicGenre){
+        this.musicGenres.add(musicGenre);
+    }
+
+    public void removeMusicGenre(MusicGenre musicGenre){
+        this.musicGenres.remove(musicGenre);
+    }
 }

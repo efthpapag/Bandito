@@ -28,10 +28,10 @@ public class Employer extends User{
         super(username, firstname, lastname, password);
     }
 
-    //Other
+    //Getters
 
-    public void addJob(Job job){
-        jobs.add(job);
+    public Set<Job> getJobs(){
+        return this.jobs;
     }
-    
+
 }

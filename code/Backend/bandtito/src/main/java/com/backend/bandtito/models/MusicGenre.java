@@ -45,6 +45,18 @@ public class MusicGenre {
         return this.name;
     }
 
+    public Set<Concert> getConcerts(){
+        return this.concerts;
+    }
+
+    public Set<Band> getBands(){
+        return this.bands;
+    }
+
+    public Set<Musician> getMusicians(){
+        return this.musicians;
+    }
+
     //toString
 
     public String toString(){

@@ -40,6 +40,10 @@ public class User {
 
     //Getters
 
+    public String getUsername(){
+            return this.username;
+    }
+    
     public String getFirstName(){
         return this.firstname;
     }
@@ -48,12 +52,22 @@ public class User {
         return this.lastname;
     }
 
-    public String getUsername(){
-        return this.username;
-    }
-
     public String getPassword(){
         return this.password;
+    }
+
+    //Setters
+
+    public void setFirstName(String firstname){
+        this.firstname = firstname;
+    }
+
+    public void setLastName(String lastname){
+        this.lastname = lastname;
+    }
+
+    public void setPassword(String password){
+        this.password = password;
     }
 
     //toString

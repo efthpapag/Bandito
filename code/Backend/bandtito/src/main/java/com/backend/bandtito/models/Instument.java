@@ -45,6 +45,14 @@ public class Instument {
         return this.name;
     }
 
+    public Set<BandPosition> getBandPositions(){
+        return this.bandPositions;
+    }
+
+    public Set<Musician> getMusicians(){
+        return this.musicians;
+    }
+
     //toString
 
     public String toString(){

@@ -70,11 +70,21 @@ public class BandPosition {
         return this.occupied;
     }
 
+    public Instument getInstument(){
+        return this.instument;
+    }
+
+    public Band getBand(){
+        return this.band;
+    }
+
     //Setters
 
     public void setOccupied(boolean occupied){
         this.occupied = occupied;
     }
+
+    //Other
 
     public void fillPossition(Musician musician){
         this.occupied = true;
