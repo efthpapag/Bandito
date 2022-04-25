@@ -1,5 +1,8 @@
 # Bandito
 
+# Hibernate ddl auto (create, create-drop, validate, update)
+spring.jpa.hibernate.ddl-auto= create 
+ 
 ## Discription 
 
 A social networking application with the purpose to help musicians form bands and bands connect with employers.  
@@ -43,3 +46,15 @@ A social networking application with the purpose to help musicians form bands an
 ### Search
 
 ![Search Activity Diagram](docs/Search.png)
+
+##Note
+For this project to work correctly on your pc you must create a application.properties with your postgr
+ server username and password in Bandito\code\Backend\bandtito\src\main\resources
+(resources folder does not exist it must also be created).<br />
+For example<br />
+server.port=9090
+spring.datasource.url= jdbc:postgresql://localhost:5432/Bandito
+spring.datasource.username= postgres
+spring.datasource.password= password
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation= true
+spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.PostgreSQLDialect
