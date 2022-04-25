@@ -1,19 +1,33 @@
 package com.backend.bandtito.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "musicGenre", schema = "public")
+@Table(name = "music_genres", schema = "public")
 public class MusicGenre {
 
     //Columns
 
     @Id
-    @Column(name = "name", nullable = true)
+    @Column(name = "music_genre_name", nullable = true)
     private String name;
+
+    @ManyToMany(mappedBy = "musicGenres", fetch = FetchType.EAGER)
+    Set<Concert> concerts = new HashSet<>();
+
+    @ManyToMany(mappedBy = "musicGenres", fetch = FetchType.EAGER)
+    Set<Band> bands = new HashSet<>();
+
+    @ManyToMany(mappedBy = "musicGenres", fetch = FetchType.EAGER)
+    Set<Musician> musicians = new HashSet<>();
 
     //Constructors
 

@@ -14,7 +14,7 @@ public class Employer extends User{
 
     //Columns
 
-    @OneToMany(mappedBy = "employer", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "employer", fetch = FetchType.EAGER,
     cascade = CascadeType.ALL)
     private Set<Job> jobs;
 

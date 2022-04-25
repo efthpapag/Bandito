@@ -1,10 +1,12 @@
 package com.backend.bandtito.models;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,12 +19,15 @@ public class Instument {
     //Columns
 
     @Id
-    @Column(name = "name", nullable = true)
+    @Column(name = "instument_name", nullable = true)
     private String name;
 
-    @OneToMany(mappedBy = "instument", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "instument", fetch = FetchType.EAGER,
     cascade = CascadeType.ALL)
     private Set<BandPosition> bandPositions;
+
+    @ManyToMany(mappedBy = "instuments", fetch = FetchType.EAGER)
+    Set<Musician> musicians = new HashSet<>();
 
     //Constructors
 

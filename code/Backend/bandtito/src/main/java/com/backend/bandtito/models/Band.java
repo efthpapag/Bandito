@@ -1,11 +1,19 @@
 package com.backend.bandtito.models;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import java.util.HashSet;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 
 @Entity
@@ -15,7 +23,7 @@ public class Band {
     //Columns
     
     @Id
-    @Column(name = "name", nullable = true)
+    @Column(name = "band_name", nullable = true)
     private String name;
 
     @Column(name = "address", nullable = true)
@@ -25,8 +33,13 @@ public class Band {
     @JoinColumn(name = "admin", nullable = true)
     private Musician admin;
 
-   // @OneToMany(mappedBy="name")
-    //private Set<BandPosition> bandPositions;
+    @OneToMany(mappedBy = "band", fetch = FetchType.EAGER,
+    cascade = CascadeType.ALL)
+    private Set<BandPosition> bandPositions;
+
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @JoinTable(name = "music_genres_bands", joinColumns = @JoinColumn(name = "band_name"), inverseJoinColumns = @JoinColumn(name = "music_genre_name"))
+    private Set<MusicGenre> musicGenres = new HashSet<>();
 
     //Constructors 
 
@@ -34,10 +47,11 @@ public class Band {
         
     }
 
-    public Band(String name, String address, Musician admin) {
+    public Band(String name, String address, Musician admin, Set<MusicGenre> musicGenres) {
         this.name = name;
         this.address = address;
         this.admin = admin;
+        this.musicGenres = musicGenres;
     }
 
     //Getters
@@ -48,6 +62,10 @@ public class Band {
 
     public String getAddress(){
         return this.address;
+    }
+
+    public Set<BandPosition> getBandPositions(){
+        return this.bandPositions;
     }
 
     //Setters

@@ -53,7 +53,8 @@ occupied : Boolean</panel_attributes>
     </coordinates>
     <panel_attributes>Concert
 --
-date : LocalDate</panel_attributes>
+date : LocalDate
+uuid : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>

@@ -19,17 +19,17 @@ public class Job {
     //Columns
 
     @Id
-    @Column(name = "name", nullable = true)
+    @Column(name = "job_name", nullable = true)
     private String name;
 
     @Column(name = "address", nullable = true)
     private String address;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "username", nullable = false)
     private Employer employer;
 
-    @OneToMany(mappedBy = "job", fetch = FetchType.LAZY,
+    @OneToMany(mappedBy = "job", fetch = FetchType.EAGER,
     cascade = CascadeType.ALL)
     private Set<Concert> concerts;
 
@@ -61,6 +61,10 @@ public class Job {
 
     public void getAddress(String address){
         this.address = address;
+    }
+
+    public Set<Concert> getConcerts(){
+        return this.concerts;
     }
 
     //toString

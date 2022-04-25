@@ -1,10 +1,15 @@
 package com.backend.bandtito.models;
 
+import java.util.HashSet;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -14,15 +19,28 @@ public class Musician extends User{
 
     //Columns
 
-    @Column(name = "isBandMember", nullable = true)
+    @Column(name = "is_band_member", nullable = true)
     private boolean isBandMember;
 
     @Column(name = "address", nullable = true)
     private String address;
 
-    @OneToOne(mappedBy = "admin", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "admin", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "admin_of_band", nullable = true)
     private Band adminOfBand;
+
+    @OneToOne(mappedBy = "musician", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "position", nullable = true)
+    private BandPosition bandPosition;
+
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @JoinTable(name = "music_genres_of_musicians", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "music_genre_name"))
+    private Set<MusicGenre> musicGenres = new HashSet<>();
+
+    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
+    @JoinTable(name = "musician_instuments", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "instument_name"))
+    private Set<Instument> instuments = new HashSet<>();
+    
 
     //Constructors
 

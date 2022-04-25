@@ -1,5 +1,7 @@
 package com.backend.bandtito.models;
 
+import java.util.Random;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,14 +12,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "bandPositions", schema = "public")
+@Table(name = "band_positions", schema = "public")
 public class BandPosition {
 
     //Columns 
 
     @Id
-    @Column(name = "name", nullable = true)
-    private String name;
+    @Column(name = "band_positions_uuid", nullable = true)
+    private String uuid;
 
     @Column(name = "occupied", nullable = true)
     private boolean occupied;
@@ -27,8 +29,12 @@ public class BandPosition {
     private Musician musician;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "instument", nullable = false)
+    @JoinColumn(name = "band_position_instument", nullable = false)
     private Instument instument;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "band_name", nullable = false)
+    private Band band;
 
     //Constructors
 
@@ -36,16 +42,28 @@ public class BandPosition {
         this.occupied = false;
     }
 
-    public BandPosition(String name, Instument instument) {
-        this.name = name;
+    public BandPosition(Instument instument, Band band) {
+
+        int leftLimit = 48;
+        int rightLimit = 122;
+        int targetStringLength = 10;
+        Random random = new Random();
+
+        this.uuid = random.ints(leftLimit, rightLimit + 1)
+        .filter(i -> (i <= 57 || i >= 65) && (i <= 90 || i >= 97))
+        .limit(targetStringLength)
+        .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
+        .toString();
+        
         this.occupied = false;
         this.instument = instument;
+        this.band = band;
     }
 
     //Getters
 
-    public String getName(){
-        return this.name;
+    public String getUuid(){
+        return this.uuid;
     }
 
     public boolean getOccupied(){
@@ -53,10 +71,6 @@ public class BandPosition {
     }
 
     //Setters
-
-    public void settName(String name){
-        this.name = name;
-    }
 
     public void setOccupied(boolean occupied){
         this.occupied = occupied;
@@ -70,7 +84,7 @@ public class BandPosition {
     //toString
 
     public String toString(){
-        return this.name;
+        return this.uuid;
     }
     
 }
