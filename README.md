@@ -49,13 +49,13 @@ For this project to work correctly on your pc you must create a application.prop
  server username and password in Bandito\code\Backend\bandtito\src\main\resources
 (resources folder does not exist it must also be created). For example <br />
 
-server.port=9090
-spring.datasource.url= jdbc:postgresql://localhost:5432/Bandito
-spring.datasource.username= postgres
-spring.datasource.password= password 
+server.port=9090 <br />
+spring.datasource.url= jdbc:postgresql://localhost:5432/Bandito <br />
+spring.datasource.username= postgres <br />
+spring.datasource.password= password  <br />
 
-spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation= true
-spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.PostgreSQLDialect
+spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation= true <br />
+spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.PostgreSQLDialect <br />
 
-spring.jpa.hibernate.ddl-auto= create
+spring.jpa.hibernate.ddl-auto= create <br />
 
