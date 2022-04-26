@@ -80,7 +80,7 @@ band members</panel_attributes>
       <h>64</h>
     </coordinates>
     <panel_attributes>7. Search for users 
-by unique code </panel_attributes>
+by username </panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -643,11 +643,11 @@ valign=center</panel_attributes>
     <coordinates>
       <x>464</x>
       <y>304</y>
-      <w>800</w>
+      <w>808</w>
       <h>320</h>
     </coordinates>
     <panel_attributes>lt=.&gt;
 &lt;&lt;includes&gt;&gt;</panel_attributes>
-    <additional_attributes>10.0;10.0;910.0;10.0;920.0;380.0;850.0;380.0</additional_attributes>
+    <additional_attributes>10.0;10.0;920.0;10.0;920.0;380.0;850.0;380.0</additional_attributes>
   </element>
 </diagram>
