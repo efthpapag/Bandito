@@ -52,7 +52,7 @@ For this project to work correctly on your pc you must create a application.prop
 server.port=9090
 spring.datasource.url= jdbc:postgresql://localhost:5432/Bandito
 spring.datasource.username= postgres
-spring.datasource.password= mati9503 
+spring.datasource.password= password 
 
 spring.jpa.properties.hibernate.jdbc.lob.non_contextual_creation= true
 spring.jpa.properties.hibernate.dialect= org.hibernate.dialect.PostgreSQLDialect
