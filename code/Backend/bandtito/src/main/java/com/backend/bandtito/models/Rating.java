@@ -11,8 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "years_of_experience", schema = "public")
-public class YearsOfExperience {
+@Table(name = "ratings", schema = "public")
+public class Rating {
 
     //Columns
 
@@ -20,24 +20,24 @@ public class YearsOfExperience {
     @Column(name = "uuid", nullable = true)
     private String uuid;
 
-    @Column(name = "number_of_years", nullable = true)
-    private Integer numberOfYears;
+    @Column(name = "rating", nullable = true)
+    private Integer rating;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "band_name", nullable = false)
+    private Band band;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "username", nullable = false)
-    private Musician musician;
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "instument_name", nullable = false)
-    private Instument instument;
+    private Employer employer;
 
     //Constructors
 
-    public YearsOfExperience() {
+    public Rating() {
         
     }
 
-    public YearsOfExperience(int numberOfYears, Musician musician, Instument instument) {
+    public Rating(int rating, Band band, Employer employer) {
 
         int leftLimit = 48;
         int rightLimit = 122;
@@ -49,33 +49,33 @@ public class YearsOfExperience {
         .limit(targetStringLength)
         .collect(StringBuilder::new, StringBuilder::appendCodePoint, StringBuilder::append)
         .toString();
-        this.numberOfYears = numberOfYears;
-        this.musician = musician;
-        this.instument = instument;
+        this.rating = rating;
+        this.employer = employer;
+        this.band = band;
     }
 
     //Getters
+
+    public int getRating(){
+        return this.rating;
+    }
 
     public String getUuid(){
         return this.uuid;
     }
 
-    public int getNumberOfYears(){
-        return this.numberOfYears;
+    public Employer getEmployer(){
+        return this.employer;
     }
 
-    public Musician getMusician(){
-        return this.musician;
+    public Band getBand(){
+        return this.band;
     }
 
-    public Instument getInstument(){
-        return this.instument;
-    }
+    //Setters
 
-    //Setting
-
-    public void setNumberOfYears(int numberOfYears){
-        this.numberOfYears = numberOfYears;
+    public void setNumberOfYears(int rating){
+        this.rating = rating;
     }
     
 }

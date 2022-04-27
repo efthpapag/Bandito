@@ -41,6 +41,10 @@ public class Band {
     @JoinTable(name = "music_genres_bands", joinColumns = @JoinColumn(name = "band_name"), inverseJoinColumns = @JoinColumn(name = "music_genre_name"))
     private Set<MusicGenre> musicGenres = new HashSet<>();
 
+    @OneToMany(mappedBy = "band", fetch = FetchType.EAGER,
+    cascade = CascadeType.ALL)
+    private Set<Rating> ratings;
+
     //Constructors 
 
     public Band() {
@@ -74,6 +78,10 @@ public class Band {
 
     public Set<MusicGenre> getMusicGenres(){
         return this.musicGenres;
+    }
+
+    public Set<Rating> getRating(){
+        return this.ratings;
     }
 
     //Setters

@@ -18,6 +18,10 @@ public class Employer extends User{
     cascade = CascadeType.ALL)
     private Set<Job> jobs;
 
+    @OneToMany(mappedBy = "employer", fetch = FetchType.EAGER,
+    cascade = CascadeType.ALL)
+    private Set<Rating> ratings;
+
     //Constructors
     
     public Employer(){
@@ -32,6 +36,10 @@ public class Employer extends User{
 
     public Set<Job> getJobs(){
         return this.jobs;
+    }
+
+    public Set<Rating> getRating(){
+        return this.ratings;
     }
 
 }

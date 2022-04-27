@@ -29,6 +29,10 @@ public class Instument {
     @ManyToMany(mappedBy = "instuments", fetch = FetchType.EAGER)
     Set<Musician> musicians = new HashSet<>();
 
+    @OneToMany(mappedBy = "instument", fetch = FetchType.EAGER,
+    cascade = CascadeType.ALL)
+    private Set<YearsOfExperience> yearsOfExperience;
+
     //Constructors
 
     public Instument() {
@@ -51,6 +55,10 @@ public class Instument {
 
     public Set<Musician> getMusicians(){
         return this.musicians;
+    }
+
+    public Set<YearsOfExperience> getYearsOfExperience(){
+        return this.yearsOfExperience;
     }
 
     //toString

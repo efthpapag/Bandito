@@ -10,6 +10,7 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -40,6 +41,10 @@ public class Musician extends User{
     @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
     @JoinTable(name = "musician_instuments", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "instument_name"))
     private Set<Instument> instuments = new HashSet<>();
+
+    @OneToMany(mappedBy = "musician", fetch = FetchType.EAGER,
+    cascade = CascadeType.ALL)
+    private Set<YearsOfExperience> yearsOfExperience;
     
 
     //Constructors
@@ -76,6 +81,10 @@ public class Musician extends User{
 
     public Set<MusicGenre> getMusicGenres(){
         return this.musicGenres;
+    }
+
+    public Set<YearsOfExperience> getYearsOfExperience(){
+        return this.yearsOfExperience;
     }
     
     //Setters
