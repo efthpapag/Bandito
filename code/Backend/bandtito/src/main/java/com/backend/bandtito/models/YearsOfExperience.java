@@ -24,12 +24,12 @@ public class YearsOfExperience {
     private Integer numberOfYears;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "username", nullable = false)
+    @JoinColumn(name = "username", nullable = true)
     private Musician musician;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "instument_name", nullable = false)
-    private Instument instument;
+    @ManyToOne(fetch = FetchType.EAGER, optional = true)
+    @JoinColumn(name = "instument_name", nullable = true)
+    private Instrument instrument;
 
     //Constructors
 
@@ -37,7 +37,7 @@ public class YearsOfExperience {
         
     }
 
-    public YearsOfExperience(int numberOfYears, Musician musician, Instument instument) {
+    public YearsOfExperience(int numberOfYears, Musician musician, Instrument instrument) {
 
         int leftLimit = 48;
         int rightLimit = 122;
@@ -51,7 +51,7 @@ public class YearsOfExperience {
         .toString();
         this.numberOfYears = numberOfYears;
         this.musician = musician;
-        this.instument = instument;
+        this.instrument = instrument;
     }
 
     //Getters
@@ -68,8 +68,8 @@ public class YearsOfExperience {
         return this.musician;
     }
 
-    public Instument getInstument(){
-        return this.instument;
+    public Instrument getInstument(){
+        return this.instrument;
     }
 
     //Setting

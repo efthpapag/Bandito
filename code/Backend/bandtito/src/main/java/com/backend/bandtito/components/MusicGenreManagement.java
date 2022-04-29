@@ -1,11 +1,13 @@
-package com.backend.bandtito.utils;
+package com.backend.bandtito.components;
 
 import com.backend.bandtito.models.MusicGenre;
 
 import com.backend.bandtito.repositories.MusicGenreRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MusicGenreManagement {
 
 	@Autowired
@@ -17,5 +19,4 @@ public class MusicGenreManagement {
         MusicGenreRepo.save(musicGenre);
         return musicGenre;
     }
-
 }

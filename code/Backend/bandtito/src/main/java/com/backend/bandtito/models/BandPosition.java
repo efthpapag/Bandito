@@ -28,9 +28,9 @@ public class BandPosition {
     @JoinColumn(name = "musician", nullable = true)
     private Musician musician;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "band_position_instument", nullable = false)
-    private Instument instument;
+    private Instrument instrument;
 
     @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "band_name", nullable = false)
@@ -42,7 +42,7 @@ public class BandPosition {
         this.occupied = false;
     }
 
-    public BandPosition(Instument instument, Band band) {
+    public BandPosition(Instrument instrument, Band band) {
 
         int leftLimit = 48;
         int rightLimit = 122;
@@ -56,7 +56,7 @@ public class BandPosition {
         .toString();
         
         this.occupied = false;
-        this.instument = instument;
+        this.instrument = instrument;
         this.band = band;
     }
 
@@ -70,8 +70,8 @@ public class BandPosition {
         return this.occupied;
     }
 
-    public Instument getInstument(){
-        return this.instument;
+    public Instrument getInstument(){
+        return this.instrument;
     }
 
     public Band getBand(){

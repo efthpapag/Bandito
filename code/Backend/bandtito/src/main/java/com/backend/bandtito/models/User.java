@@ -24,6 +24,9 @@ public class User {
     @Column(name = "password", nullable = true)
     private String password;
 
+    @Column(name = "profile_pic", nullable = true)
+    private String profilePic;
+
     //Constructors
 
     public User() {
@@ -54,6 +57,10 @@ public class User {
 
     public String getPassword(){
         return this.password;
+    }
+
+    public String getProfilePic(){
+        return this.profilePic;
     }
 
     //Setters

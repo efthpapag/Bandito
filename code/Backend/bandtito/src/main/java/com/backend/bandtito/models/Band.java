@@ -11,6 +11,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -26,8 +27,17 @@ public class Band {
     @Column(name = "band_name", nullable = true)
     private String name;
 
+    @Column(name = "for_hire", nullable = true)
+    private boolean forHire;
+
     @Column(name = "address", nullable = true)
     private String address;
+
+    @Column(name = "number_of_positions", nullable = true)
+    private int numberOfPositions;
+
+    @Column(name = "is_full", nullable = false)
+    private boolean isFull;
 
     @OneToOne
     @JoinColumn(name = "admin", nullable = true)
@@ -48,20 +58,27 @@ public class Band {
     //Constructors 
 
     public Band() {
-        
+
     }
 
-    public Band(String name, String address, Musician admin, Set<MusicGenre> musicGenres) {
+    public Band(String name, String address, Musician admin, Set<MusicGenre> musicGenres, Boolean forHire) {
         this.name = name;
         this.address = address;
         this.admin = admin;
         this.musicGenres = musicGenres;
+        this.isFull = false;
+        this.forHire = forHire;
+        this.numberOfPositions = 0;
     }
 
     //Getters
 
     public String getName(){
         return this.name;
+    }
+
+    public boolean getForHire(){
+        return this.forHire;
     }
 
     public String getAddress(){
@@ -94,6 +111,14 @@ public class Band {
         this.admin = admin;
     }
 
+    public void setForHire(Boolean forHire){
+        this.forHire = forHire;
+    }
+
+    public void setMusicGenres(Set<MusicGenre> musicGenres){
+        this.musicGenres = musicGenres;
+    }
+
     //toString
 
     public String toString(){
@@ -108,5 +133,25 @@ public class Band {
 
     public void removeMusicGenre(MusicGenre musicGenre){
         this.musicGenres.remove(musicGenre);
+    }
+
+    public void updateNumberOfPositions(){
+        this.numberOfPositions = bandPositions.size();
+    }
+
+    public void updateFull(){
+
+        Iterator<BandPosition> bandPositionsIterator = bandPositions.iterator();
+        boolean isFull = true;
+
+        while(bandPositionsIterator.hasNext()) {
+            if(!bandPositionsIterator.next().getOccupied()){
+                isFull = false;
+            }
+         }
+
+        if(isFull){
+           this.isFull = true;
+        }
     }
 }

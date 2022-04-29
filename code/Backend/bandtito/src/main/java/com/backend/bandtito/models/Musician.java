@@ -26,6 +26,9 @@ public class Musician extends User{
     @Column(name = "address", nullable = true)
     private String address;
 
+    @Column(name = "age", nullable = true)
+    private int age;
+
     @OneToOne(mappedBy = "admin", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "admin_of_band", nullable = true)
     private Band adminOfBand;
@@ -38,10 +41,6 @@ public class Musician extends User{
     @JoinTable(name = "music_genres_of_musicians", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "music_genre_name"))
     private Set<MusicGenre> musicGenres = new HashSet<>();
 
-    @ManyToMany(cascade = { CascadeType.ALL }, fetch = FetchType.EAGER)
-    @JoinTable(name = "musician_instuments", joinColumns = @JoinColumn(name = "username"), inverseJoinColumns = @JoinColumn(name = "instument_name"))
-    private Set<Instument> instuments = new HashSet<>();
-
     @OneToMany(mappedBy = "musician", fetch = FetchType.EAGER,
     cascade = CascadeType.ALL)
     private Set<YearsOfExperience> yearsOfExperience;
@@ -53,15 +52,19 @@ public class Musician extends User{
         
     }
 
-    public Musician(String username, String firstname, String lastname, String password, String address, Set<Instument> instuments, Set<MusicGenre> musicGenres) {
+    public Musician(String username, String firstname, String lastname, String password, String address, int age, Set<MusicGenre> musicGenres) {
         super(username, firstname, lastname, password);
         this.address = address;
         this.isBandMember = false;
-        this.instuments = instuments;
+        this.age = age;
         this.musicGenres = musicGenres;
     }
 
     //Getters
+
+    public int getAge(){
+        return this.age;
+    }
 
     public String getAddress(){
         return this.address;
@@ -73,10 +76,6 @@ public class Musician extends User{
 
     public Band getAdminOfBand(){
         return this.adminOfBand;
-    }
-
-    public Set<Instument> getInstuments(){
-        return this.instuments;
     }
 
     public Set<MusicGenre> getMusicGenres(){
@@ -97,11 +96,11 @@ public class Musician extends User{
         this.isBandMember = isBandMember;
     }
 
-    //Other
-
-    public void addInstument(Instument instument){
-        this.instuments.add(instument);
+    public void setMusicGenres(Set<MusicGenre> musicGenres){
+        this.musicGenres = musicGenres;
     }
+
+    //Other
 
     public void addMusicGenre(MusicGenre musicGenre){
         this.musicGenres.add(musicGenre);

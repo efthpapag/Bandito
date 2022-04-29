@@ -38,7 +38,7 @@ public class Employer extends User{
         return this.jobs;
     }
 
-    public Set<Rating> getRating(){
+    public Set<Rating> getRatings(){
         return this.ratings;
     }
 
