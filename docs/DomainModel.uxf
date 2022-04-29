@@ -12,7 +12,8 @@
     <panel_attributes>Musician 
 --
 is band member : Boolean
-address : String</panel_attributes>
+address : String
+age : int</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -21,12 +22,16 @@ address : String</panel_attributes>
       <x>390</x>
       <y>620</y>
       <w>240</w>
-      <h>100</h>
+      <h>130</h>
     </coordinates>
     <panel_attributes>Band
 --
 meeting location address : String
-name : String</panel_attributes>
+name : String
+rating : int
+number of member : int 
+full : boolean
+for hire : boolean</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
@@ -312,7 +317,8 @@ address : String
 first name : String
 last name : String
 username : Srting
-password : String</panel_attributes>
+password : String
+profile image : String</panel_attributes>
     <additional_attributes/>
   </element>
   <element>
