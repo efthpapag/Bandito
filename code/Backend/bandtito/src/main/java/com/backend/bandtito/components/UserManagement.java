@@ -15,6 +15,8 @@ import com.backend.bandtito.repositories.UserRepository;
 import com.backend.bandtito.repositories.YearsOfExperienceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -29,6 +31,8 @@ public class UserManagement {
     @Autowired
     private YearsOfExperienceRepository YearsOfExperienceRepo;
 
+    private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
     //Create musician
     public Musician createMusician(String username, String firstname, String lastname, String password, String address, int age, List<String> listOfInstuments, List<Integer> listOfYears, List<String> listOfMusicGenres){
 
@@ -38,7 +42,7 @@ public class UserManagement {
         }
         Set<MusicGenre> musicGenresSet = new HashSet<>(musicGenresList);
 
-        Musician musician = new Musician(username, firstname, lastname, password, address, age, musicGenresSet);
+        Musician musician = new Musician(username, firstname, lastname,  passwordEncoder.encode(password), address, age, musicGenresSet);
         UserRepo.save(musician);
 
         for (int i = 0; i < listOfInstuments.size(); i++){
@@ -62,7 +66,7 @@ public class UserManagement {
         musician.setMusicGenres(musicGenresSet);
         musician.setFirstName(firstname);
         musician.setLastName(lastname);
-        musician.setPassword(password);
+        musician.setPassword(passwordEncoder.encode(password));
         
         UserRepo.save(musician);
         return musician;
@@ -85,7 +89,7 @@ public class UserManagement {
 
     //create employer
     public Employer createEmployer(String username, String firstname, String lastname, String password){
-        Employer employer = new Employer(username, firstname, lastname, password);
+        Employer employer = new Employer(username, firstname, lastname, passwordEncoder.encode(password));
         UserRepo.save(employer);
         return employer;
     }
@@ -96,7 +100,7 @@ public class UserManagement {
         Employer employer = (Employer) UserRepo.findByUsername(username);
         employer.setFirstName(firstname);
         employer.setLastName(lastname);
-        employer.setPassword(password);
+        employer.setPassword(passwordEncoder.encode(password));
         UserRepo.save(employer);
         return employer;
     }
