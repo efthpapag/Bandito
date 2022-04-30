@@ -28,8 +28,8 @@ public class Employer extends User{
         
     }
 
-    public Employer(String username,String firstname, String lastname, String password){
-        super(username, firstname, lastname, password);
+    public Employer(String username,String firstname, String lastname, String password, String profilePic){
+        super(username, firstname, lastname, password, profilePic);
     }
 
     //Getters

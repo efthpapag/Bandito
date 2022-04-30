@@ -1,5 +1,5 @@
 package com.backend.bandtito;
-
+/*
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -34,14 +34,14 @@ import com.backend.bandtito.repositories.RatingRepository;
 import com.backend.bandtito.repositories.UserRepository;
 import com.backend.bandtito.repositories.YearsOfExperienceRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired;*/
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class BandtitoApplication {
 
-	@Autowired
+	/*@Autowired
     private UserRepository UserRepo;
 	@Autowired
     private BandPositionRepository BandPositionRepo;
@@ -68,13 +68,13 @@ public class BandtitoApplication {
     @Autowired
     private MusicGenreManagement musicGenreManagement;
     @Autowired
-    private UserManagement userManagement;
+    private UserManagement userManagement;*/
 
 	public static void main(String[] args) {
 		SpringApplication.run(BandtitoApplication.class, args);
 	}
 
-	@PostConstruct
+	/*@PostConstruct
     public void init() throws InterruptedException{
 
         //test
@@ -280,5 +280,5 @@ public class BandtitoApplication {
 
         System.out.println(((Musician) UserRepo.findByUsername("musician a")).getYearsInBand().toString());
 
-    }
+    }*/
 }

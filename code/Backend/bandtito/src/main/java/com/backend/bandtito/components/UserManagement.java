@@ -34,7 +34,7 @@ public class UserManagement {
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     //Create musician
-    public Musician createMusician(String username, String firstname, String lastname, String password, String address, int age, List<String> listOfInstuments, List<Integer> listOfYears, List<String> listOfMusicGenres){
+    public Musician createMusician(String username, String firstname, String lastname, String password, String address, int age, List<String> listOfInstuments, List<Integer> listOfYears, List<String> listOfMusicGenres, String profilePic){
 
         List<MusicGenre> musicGenresList = new ArrayList<MusicGenre>();
         for (int i = 0; i < listOfMusicGenres.size(); i++){
@@ -42,7 +42,7 @@ public class UserManagement {
         }
         Set<MusicGenre> musicGenresSet = new HashSet<>(musicGenresList);
 
-        Musician musician = new Musician(username, firstname, lastname,  passwordEncoder.encode(password), address, age, musicGenresSet);
+        Musician musician = new Musician(username, firstname, lastname,  passwordEncoder.encode(password), address, age, musicGenresSet, profilePic);
         UserRepo.save(musician);
 
         for (int i = 0; i < listOfInstuments.size(); i++){
@@ -53,20 +53,25 @@ public class UserManagement {
     }
 
     //edit musician
-    public Musician editMusician(String username, String firstname, String lastname, String password, String address, int age, List<String> listOfInstuments, List<String> listOfMusicGenres){
+    public Musician editMusician(String username, String firstname, String lastname, String password, String address, int age /*, List<String> listOfInstuments, List<Integer> listOfYears, List<String> listOfMusicGenres*/){
 
-        List<MusicGenre> musicGenresList = new ArrayList<MusicGenre>();
+        /*List<MusicGenre> musicGenresList = new ArrayList<MusicGenre>();
         for (int i = 0; i < listOfMusicGenres.size(); i++){
             musicGenresList.add(MusicGenreRepo.findByName(listOfMusicGenres.get(i)));
         }
         Set<MusicGenre> musicGenresSet = new HashSet<>(musicGenresList);
+        */
 
         Musician musician = (Musician) UserRepo.findByUsername(username);
         musician.setAddress(address);
-        musician.setMusicGenres(musicGenresSet);
+        //musician.setMusicGenres(musicGenresSet);
         musician.setFirstName(firstname);
         musician.setLastName(lastname);
         musician.setPassword(passwordEncoder.encode(password));
+
+        /*for (int i = 0; i < listOfInstuments.size(); i++){
+            this.addInstument(listOfYears.get(i), musician.getUsername(), listOfInstuments.get(i));
+        }*/
         
         UserRepo.save(musician);
         return musician;
@@ -80,6 +85,13 @@ public class UserManagement {
         return yearsOfExperience;
     }
 
+    //remove instument
+    public void removeInstument(String uuid){
+
+        YearsOfExperience yearsOfExperience = YearsOfExperienceRepo.findByUuid(uuid);
+        YearsOfExperienceRepo.delete(yearsOfExperience);
+    }
+
     //add music genre
     public void addMusicGenre(String musician, String genre){
         Musician m = (Musician) UserRepo.findByUsername(musician);
@@ -87,9 +99,16 @@ public class UserManagement {
         UserRepo.save(m);
     }
 
+    //remove music genre
+    public void removeMusicGenre(String musician, String genre){
+        Musician m = (Musician) UserRepo.findByUsername(musician);
+        m.removeMusicGenre(MusicGenreRepo.findByName(genre));
+        UserRepo.save(m);
+    }
+
     //create employer
-    public Employer createEmployer(String username, String firstname, String lastname, String password){
-        Employer employer = new Employer(username, firstname, lastname, passwordEncoder.encode(password));
+    public Employer createEmployer(String username, String firstname, String lastname, String password, String profilePic){
+        Employer employer = new Employer(username, firstname, lastname, passwordEncoder.encode(password), profilePic);
         UserRepo.save(employer);
         return employer;
     }

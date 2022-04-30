@@ -33,12 +33,13 @@ public class User {
         
     }
 
-    public User(String username,String firstname, String lastname, String password) {
+    public User(String username,String firstname, String lastname, String password, String profilePic) {
 
         this.firstname = firstname;
         this.lastname = lastname;
         this.username = username;
         this.password = password;
+        this.profilePic = profilePic;
     }
 
     //Getters

@@ -56,8 +56,8 @@ public class Musician extends User{
         
     }
 
-    public Musician(String username, String firstname, String lastname, String password, String address, int age, Set<MusicGenre> musicGenres) {
-        super(username, firstname, lastname, password);
+    public Musician(String username, String firstname, String lastname, String password, String address, int age, Set<MusicGenre> musicGenres, String profilePic) {
+        super(username, firstname, lastname, password, profilePic);
         this.address = address;
         this.isBandMember = false;
         this.age = age;
