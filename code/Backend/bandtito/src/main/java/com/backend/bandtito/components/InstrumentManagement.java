@@ -13,8 +13,8 @@ public class InstrumentManagement {
     private InstrumentRepository InstrumentRepo;
     
     //create instument
-    public Instrument createInstument(String name){
-        Instrument instument = new Instrument(name);
+    public Instrument createInstument(String name, String pictureOfInstrument){
+        Instrument instument = new Instrument(name, pictureOfInstrument);
         InstrumentRepo.save(instument);
         return instument;
     }

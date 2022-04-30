@@ -1,5 +1,7 @@
 package com.backend.bandtito.components;
 
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -39,7 +41,7 @@ public class BandManagement{
     private RatingRepository RatingRepo;
 
     //create band
-    public Band createBand(String name, String address, String musician, List<String> listOfMusicGenres, boolean forHire){
+    public Band createBand(String name, String address, String musician, List<String> listOfMusicGenres, boolean forHire, String bandPicture){
 
         List<MusicGenre> musicGenresList = new ArrayList<MusicGenre>();
         for (int i = 0; i < listOfMusicGenres.size(); i++){
@@ -47,7 +49,7 @@ public class BandManagement{
         }
         Set<MusicGenre> musicGenresSet = new HashSet<>(musicGenresList);
 
-        Band band = new Band(name, address, (Musician) UserRepo.findByUsername(musician), musicGenresSet, forHire);
+        Band band = new Band(name, address, (Musician) UserRepo.findByUsername(musician), musicGenresSet, forHire, bandPicture);
         BandRepo.save(band);
         return band;
     }
@@ -84,11 +86,28 @@ public class BandManagement{
     //fill band position
     public BandPosition fillBandPosition(String bandPositionUuid, String musician){
         BandPosition bandPosition = BandPositionRepo.findByUuid(bandPositionUuid);
-        bandPosition.fillPossition((Musician) UserRepo.findByUsername(musician));
+        bandPosition.fillPosition((Musician) UserRepo.findByUsername(musician));
         BandPositionRepo.save(bandPosition);
+        Musician m = (Musician) UserRepo.findByUsername(musician);
+        m.setIsBandMember(true);
+        UserRepo.save(m);
         Band band = BandRepo.findByName(bandPosition.getBand().getName());
         band.updateFull();
         BandRepo.save(band);
+        return bandPosition;
+    }
+
+    //empty position
+    public BandPosition emptyPosition(String bandPositionUuid){
+
+        BandPosition bandPosition = BandPositionRepo.findByUuid(bandPositionUuid);
+        Musician musician = bandPosition.getMusician();
+        LocalDate joined = bandPosition.getJoined();
+        bandPosition.leavePosition();
+        BandPositionRepo.save(bandPosition);
+        musician.setYearsInBand(musician.getYearsInBand().plus((Period.between(joined, LocalDate.now()))));
+        musician.setIsBandMember(false);
+        UserRepo.save(musician);
         return bandPosition;
     }
 

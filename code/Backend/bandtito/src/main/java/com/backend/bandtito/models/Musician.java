@@ -1,5 +1,6 @@
 package com.backend.bandtito.models;
 
+import java.time.Period;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -25,6 +26,9 @@ public class Musician extends User{
 
     @Column(name = "address", nullable = true)
     private String address;
+
+    @Column(name = "years_in_band", nullable = true)
+    private Period yearsInBand;
 
     @Column(name = "age", nullable = true)
     private int age;
@@ -58,6 +62,7 @@ public class Musician extends User{
         this.isBandMember = false;
         this.age = age;
         this.musicGenres = musicGenres;
+        this.yearsInBand = Period.ofDays(0);
     }
 
     //Getters
@@ -76,6 +81,10 @@ public class Musician extends User{
 
     public Band getAdminOfBand(){
         return this.adminOfBand;
+    }
+
+    public Period getYearsInBand(){
+        return this.yearsInBand;
     }
 
     public Set<MusicGenre> getMusicGenres(){
@@ -98,6 +107,10 @@ public class Musician extends User{
 
     public void setMusicGenres(Set<MusicGenre> musicGenres){
         this.musicGenres = musicGenres;
+    }
+
+    public void setYearsInBand(Period yearsInBand){
+        this.yearsInBand = yearsInBand;
     }
 
     //Other

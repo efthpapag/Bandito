@@ -20,6 +20,9 @@ public class Instrument {
     @Column(name = "instrument_name", nullable = true)
     private String name;
 
+    @Column(name = "picture_of_instrument", nullable = true)
+    private String pictureOfInstrument;
+
     @OneToMany(mappedBy = "instrument", fetch = FetchType.EAGER,
     cascade = CascadeType.ALL)
     private Set<BandPosition> bandPositions;
@@ -34,8 +37,9 @@ public class Instrument {
         
     }
 
-    public Instrument(String name) {
+    public Instrument(String name, String pictureOfInstrument) {
         this.name = name;
+        this.pictureOfInstrument = pictureOfInstrument;
     }
 
     //Getters

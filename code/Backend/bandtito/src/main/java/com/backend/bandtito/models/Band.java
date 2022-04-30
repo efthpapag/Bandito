@@ -36,8 +36,11 @@ public class Band {
     @Column(name = "number_of_positions", nullable = true)
     private int numberOfPositions;
 
-    @Column(name = "is_full", nullable = false)
+    @Column(name = "is_full", nullable = true)
     private boolean isFull;
+
+    @Column(name = "band_picture", nullable = true)
+    private String bandPicture;
 
     @OneToOne
     @JoinColumn(name = "admin", nullable = true)
@@ -61,13 +64,14 @@ public class Band {
 
     }
 
-    public Band(String name, String address, Musician admin, Set<MusicGenre> musicGenres, Boolean forHire) {
+    public Band(String name, String address, Musician admin, Set<MusicGenre> musicGenres, Boolean forHire, String bandPicture) {
         this.name = name;
         this.address = address;
         this.admin = admin;
         this.musicGenres = musicGenres;
         this.isFull = false;
         this.forHire = forHire;
+        this.bandPicture = bandPicture;
         this.numberOfPositions = 0;
     }
 

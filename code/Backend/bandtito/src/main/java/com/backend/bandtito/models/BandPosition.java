@@ -1,5 +1,6 @@
 package com.backend.bandtito.models;
 
+import java.time.LocalDate;
 import java.util.Random;
 
 import javax.persistence.Column;
@@ -23,6 +24,9 @@ public class BandPosition {
 
     @Column(name = "occupied", nullable = true)
     private boolean occupied;
+
+    @Column(name = "joined", nullable = true)
+    private LocalDate joined;
 
     @OneToOne
     @JoinColumn(name = "musician", nullable = true)
@@ -78,17 +82,35 @@ public class BandPosition {
         return this.band;
     }
 
+    public Musician getMusician(){
+        return this.musician;
+    }
+
+    public LocalDate getJoined(){
+        return this.joined;
+    }
+
     //Setters
 
     public void setOccupied(boolean occupied){
         this.occupied = occupied;
     }
 
+    public void setJoined(LocalDate joined){
+        this.joined = joined;
+    }
+
     //Other
 
-    public void fillPossition(Musician musician){
+    public void fillPosition(Musician musician){
         this.occupied = true;
         this.musician = musician;
+        this.joined = LocalDate.now();
+    }
+
+    public void leavePosition(){
+        this.occupied = false;
+        this.musician = null;
     }
 
     //toString

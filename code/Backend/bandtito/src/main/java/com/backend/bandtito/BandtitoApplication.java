@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 
@@ -74,7 +75,7 @@ public class BandtitoApplication {
 	}
 
 	@PostConstruct
-    public void init(){
+    public void init() throws InterruptedException{
 
         //test
 
@@ -85,8 +86,8 @@ public class BandtitoApplication {
         //instument = new Instrument("instument b");
         //InstrumentRepo.save(instument);
 
-        instrumentManagement.createInstument("instument a");
-        instrumentManagement.createInstument("instument b");
+        instrumentManagement.createInstument("instument a", "a");
+        instrumentManagement.createInstument("instument b", "b");
 
         System.out.println("create instuments");
 
@@ -117,6 +118,12 @@ public class BandtitoApplication {
 
         userManagement.createMusician("musician a", "firstname a", "lastname a", "password a", "address a", 20, 
         Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"));
+        userManagement.createMusician("musician b", "firstname b", "lastname b", "password b", "address b", 30, 
+        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"));
+        userManagement.createMusician("musician c", "firstname c", "lastname c", "password c", "address c", 40, 
+        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"));
+        userManagement.createMusician("musician d", "firstname d", "lastname d", "password d", "address d", 50, 
+        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"));
 
         System.out.println("create musicians");
 
@@ -136,7 +143,7 @@ public class BandtitoApplication {
         //Band band = new Band("band a", "a", (Musician) UserRepo.findByUsername("musician a"), musicGenresSet, true);
         //BandRepo.save(band);
 
-        bandManagement.createBand("band a", "a", "musician a", Arrays.asList("musicGenre a", "musicGenre b"), true);
+        bandManagement.createBand("band a", "a", "musician a", Arrays.asList("musicGenre a", "musicGenre b"), true, "a");
 
         System.out.println("create band");
 
@@ -171,6 +178,7 @@ public class BandtitoApplication {
         //UserRepo.save(employer);
 
         userManagement.createEmployer("employer a", "a", "a", "a");
+        userManagement.createEmployer("employer b", "b", "b", "b");
 
         System.out.println("create employers");
 
@@ -263,5 +271,14 @@ public class BandtitoApplication {
         System.out.println(RatingRepo.findByUuid(((Employer) UserRepo.findByUsername("employer a")).getRatings().iterator().next().getUuid()).getBand());//band a
 
 		System.out.println("--------------------------------------------");
+
+        BandPosition bandPosition = BandPositionRepo.findByUuid(bandUuid);
+        bandPosition.setJoined(LocalDate.now().plusDays(40));
+        BandPositionRepo.save(bandPosition);
+
+        bandManagement.emptyPosition(bandUuid);
+
+        System.out.println(((Musician) UserRepo.findByUsername("musician a")).getYearsInBand().toString());
+
     }
 }
