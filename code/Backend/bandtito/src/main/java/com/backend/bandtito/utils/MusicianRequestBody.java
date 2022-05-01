@@ -2,7 +2,7 @@ package com.backend.bandtito.utils;
 
 import java.util.List;
 
-public class CreateMusicianRequestBody{
+public class MusicianRequestBody{
     private String username;
     private String firstname;
     private String lastname;

@@ -78,6 +78,10 @@ public class User {
         this.password = password;
     }
 
+    public void setProfilePic(String profilePic){
+        this.profilePic = profilePic;
+    }
+
     //toString
 
     public String toString(){

@@ -8,6 +8,7 @@ import java.util.Set;
 import com.backend.bandtito.models.Employer;
 import com.backend.bandtito.models.MusicGenre;
 import com.backend.bandtito.models.Musician;
+import com.backend.bandtito.models.User;
 import com.backend.bandtito.models.YearsOfExperience;
 import com.backend.bandtito.repositories.InstrumentRepository;
 import com.backend.bandtito.repositories.MusicGenreRepository;
@@ -33,6 +34,18 @@ public class UserManagement {
 
     private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    //Log in user
+    public User logInUser(String username, String password){
+
+        User user = UserRepo.findByUsername(username);
+        if(user != null){
+            if(user.getPassword().equals(passwordEncoder.encode(password))){
+                return user;
+            }
+        }
+        return null;
+    }
+
     //Create musician
     public Musician createMusician(String username, String firstname, String lastname, String password, String address, int age, List<String> listOfInstuments, List<Integer> listOfYears, List<String> listOfMusicGenres, String profilePic){
 
@@ -53,7 +66,7 @@ public class UserManagement {
     }
 
     //edit musician
-    public Musician editMusician(String username, String firstname, String lastname, String password, String address, int age /*, List<String> listOfInstuments, List<Integer> listOfYears, List<String> listOfMusicGenres*/){
+    public Musician editMusician(String username, String firstname, String lastname, String password, String address, int age /*, List<String> listOfInstuments, List<Integer> listOfYears, List<String> listOfMusicGenres*/, String profilePic){
 
         /*List<MusicGenre> musicGenresList = new ArrayList<MusicGenre>();
         for (int i = 0; i < listOfMusicGenres.size(); i++){
@@ -68,6 +81,7 @@ public class UserManagement {
         musician.setFirstName(firstname);
         musician.setLastName(lastname);
         musician.setPassword(passwordEncoder.encode(password));
+        musician.setProfilePic(profilePic);
 
         /*for (int i = 0; i < listOfInstuments.size(); i++){
             this.addInstument(listOfYears.get(i), musician.getUsername(), listOfInstuments.get(i));
