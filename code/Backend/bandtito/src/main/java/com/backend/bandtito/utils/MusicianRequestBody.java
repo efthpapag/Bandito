@@ -1,5 +1,6 @@
 package com.backend.bandtito.utils;
 
+import java.util.Collections;
 import java.util.List;
 
 public class MusicianRequestBody{
@@ -8,9 +9,9 @@ public class MusicianRequestBody{
     private String lastname;
     private String password;
     private String address;
-    private int age;
+    private String age;
     private List<String> listOfInstuments;
-    private List<Integer> listOfYears;
+    private List<String> listOfYears;
     private List<String> listOfMusicGenres;
     private String profilePic;
 
@@ -37,11 +38,15 @@ public class MusicianRequestBody{
     }
 
     public List<Integer> getListOfYears(){
-        return this.listOfYears;
+        List<Integer> years = Collections.<Integer>emptyList();  
+        for(int i = 0; i < this.listOfYears.size(); i++){
+            years.add(Integer.parseInt(this.listOfYears.get(i)));
+        }
+        return years;
     }
 
     public int getAge(){
-        return this.age;
+        return Integer.parseInt(this.age);
     }
 
     public String getAddress(){

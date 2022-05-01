@@ -61,7 +61,6 @@ public class JobManagement {
 
     //delete job
     public void deleteJob(String name){
-
         JobRepo.delete(JobRepo.findByName(name));
     }
 }

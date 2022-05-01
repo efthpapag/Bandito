@@ -105,6 +105,10 @@ public class Band {
         return this.ratings;
     }
 
+    public String getBandPicture(){
+        return this.bandPicture;
+    }
+
     //Setters
 
     public void setAddress(String address){
@@ -121,6 +125,10 @@ public class Band {
 
     public void setMusicGenres(Set<MusicGenre> musicGenres){
         this.musicGenres = musicGenres;
+    }
+
+    public void setBandPicture(String bandPicture){
+        this.bandPicture = bandPicture;
     }
 
     //toString

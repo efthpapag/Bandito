@@ -31,7 +31,7 @@ public class UserController {
         System.out.println("Log In");
         System.out.println(data.getPassword());
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.ACCEPTED);
     }
 
     @PostMapping(path = "/register-musician")
@@ -75,7 +75,7 @@ public class UserController {
         System.out.println(data.getMusicGenres());
         System.out.println(data.getProfilePic());
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(path = "/register-employer")
@@ -107,7 +107,7 @@ public class UserController {
         System.out.println(data.getPassword());
         System.out.println(data.getProfilePic());
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(path = "/add-instrument")
@@ -133,7 +133,7 @@ public class UserController {
         System.out.println("instrument removed");
         System.out.println(data.getUuid());
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping(path = "/add-music-genre")
@@ -159,6 +159,6 @@ public class UserController {
         System.out.println(data.getMusician());
         System.out.println(data.getMusicGenre());
         
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }

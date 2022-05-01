@@ -55,7 +55,7 @@ public class BandManagement{
     }
 
     //edit band
-    public Band editBand(String name, String address, String musician, List<String> listOfMusicGenres, boolean forHire){
+    public Band editBand(String name, String address, String musician, List<String> listOfMusicGenres, boolean forHire, String bandPicture){
 
         List<MusicGenre> musicGenresList = new ArrayList<MusicGenre>();
         for (int i = 0; i < listOfMusicGenres.size(); i++){
@@ -67,6 +67,7 @@ public class BandManagement{
         band.setAddress(address);
         band.setMusicGenres(musicGenresSet);
         band.setForHire(forHire);
+        band.setBandPicture(bandPicture);
         
         BandRepo.save(band);
         return band;
