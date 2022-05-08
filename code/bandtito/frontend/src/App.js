@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import { Component } from 'react';
 
@@ -19,7 +18,6 @@ class App extends Component {
       <div className="App">
       <script>componentDidMount()</script>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -29,7 +27,7 @@ class App extends Component {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn React
+          hi 
         </a>
       </header>
     </div>
