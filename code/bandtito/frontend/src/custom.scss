@@ -1,4 +1,21 @@
-$primary: purple;
-$danger: red;
+@import url(https://use.fontawesome.com/releases/v5.0.10/css/all.css);
+@import url(https://fonts.googleapis.com/css?family=Comfortaa:200,300,400,700);
+$font-family-base:Comfortaa;
+@import url(https://fonts.googleapis.com/css?family=Fugaz+One:200,300,400,700);
+$headings-font-family:Fugaz One;
 
-@import '~bootstrap/scss/bootstrap.scss';
+$enable-grid-classes:false;
+$primary:#182018;
+$secondary:#0ed145;
+$success:#63d489;
+$danger:#ff0008;
+$info:#000000;
+$warning:#ff7f27;
+$light:#ffffff;
+$dark:#b83dba;
+$enable-gradients:true;
+
+$border-width:1px;
+$btn-border-radius:1.35rem;
+
+@import "../node_modules/bootstrap/scss/bootstrap.scss";

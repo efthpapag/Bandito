@@ -1,5 +1,5 @@
 package com.backend.bandtito;
-/*
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -34,14 +34,14 @@ import com.backend.bandtito.repositories.RatingRepository;
 import com.backend.bandtito.repositories.UserRepository;
 import com.backend.bandtito.repositories.YearsOfExperienceRepository;
 
-import org.springframework.beans.factory.annotation.Autowired;*/
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
 public class BandtitoApplication {
 
-	/*@Autowired
+	@Autowired
     private UserRepository UserRepo;
 	@Autowired
     private BandPositionRepository BandPositionRepo;
@@ -68,13 +68,13 @@ public class BandtitoApplication {
     @Autowired
     private MusicGenreManagement musicGenreManagement;
     @Autowired
-    private UserManagement userManagement;*/
+    private UserManagement userManagement;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BandtitoApplication.class, args);
 	}
 
-	/*@PostConstruct
+	@PostConstruct
     public void init() throws InterruptedException{
 
         //test
@@ -117,13 +117,13 @@ public class BandtitoApplication {
         //UserRepo.save(musician);
 
         userManagement.createMusician("musician a", "firstname a", "lastname a", "password a", "address a", 20, 
-        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"));
+        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"), "a");
         userManagement.createMusician("musician b", "firstname b", "lastname b", "password b", "address b", 30, 
-        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"));
+        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"), "b");
         userManagement.createMusician("musician c", "firstname c", "lastname c", "password c", "address c", 40, 
-        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"));
+        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"), "a");
         userManagement.createMusician("musician d", "firstname d", "lastname d", "password d", "address d", 50, 
-        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"));
+        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"), "a");
 
         System.out.println("create musicians");
 
@@ -177,8 +177,8 @@ public class BandtitoApplication {
         //employer = new Employer("employer b", "b", "b", "b");
         //UserRepo.save(employer);
 
-        userManagement.createEmployer("employer a", "a", "a", "a");
-        userManagement.createEmployer("employer b", "b", "b", "b");
+        userManagement.createEmployer("employer a", "a", "a", "a", "a");
+        userManagement.createEmployer("employer b", "b", "b", "b", "a");
 
         System.out.println("create employers");
 
@@ -280,5 +280,5 @@ public class BandtitoApplication {
 
         System.out.println(((Musician) UserRepo.findByUsername("musician a")).getYearsInBand().toString());
 
-    }*/
+    }
 }
