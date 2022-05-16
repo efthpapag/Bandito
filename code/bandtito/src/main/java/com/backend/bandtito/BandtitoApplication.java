@@ -9,10 +9,14 @@ import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
 
+import com.backend.bandtito.components.BandInitializer;
 import com.backend.bandtito.components.BandManagement;
+import com.backend.bandtito.components.InstrumentInitializer;
 import com.backend.bandtito.components.InstrumentManagement;
 import com.backend.bandtito.components.JobManagement;
 import com.backend.bandtito.components.MusicGenreManagement;
+import com.backend.bandtito.components.MusicGenresInitializer;
+import com.backend.bandtito.components.MusiciansInitializer;
 import com.backend.bandtito.components.UserManagement;
 import com.backend.bandtito.models.Band;
 import com.backend.bandtito.models.BandPosition;
@@ -69,6 +73,14 @@ public class BandtitoApplication {
     private MusicGenreManagement musicGenreManagement;
     @Autowired
     private UserManagement userManagement;
+    @Autowired
+    private InstrumentInitializer instrumentInitializer;
+    @Autowired
+    private MusicGenresInitializer musicGenresInitializer;
+    @Autowired
+    private MusiciansInitializer musiciansInitializer;
+    @Autowired
+    private BandInitializer bandInitializer;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BandtitoApplication.class, args);
@@ -76,6 +88,15 @@ public class BandtitoApplication {
 
 	@PostConstruct
     public void init() throws InterruptedException{
+
+        instrumentInitializer.init();
+        System.out.println("--------------------------------------------");
+        musicGenresInitializer.init();
+        System.out.println("--------------------------------------------");
+        musiciansInitializer.init();
+        System.out.println("--------------------------------------------");
+        bandInitializer.init();
+        System.out.println("--------------------------------------------");
 
         //test
 
@@ -86,7 +107,7 @@ public class BandtitoApplication {
         //instument = new Instrument("instument b");
         //InstrumentRepo.save(instument);
 
-        instrumentManagement.createInstument("instument a", "a");
+        /*instrumentManagement.createInstument("instument a", "a");
         instrumentManagement.createInstument("instument b", "b");
 
         System.out.println("create instuments");
@@ -216,12 +237,12 @@ public class BandtitoApplication {
 
         bandManagement.rateBand("employer a", "band a", 5);
 
-        System.out.println("rate band");
+        System.out.println("rate band");*/
 
 
         
         //not all results tested only run time errors
-        System.out.println("--------------------------------------------");
+        /*System.out.println("--------------------------------------------");
 
         System.out.println(UserRepo.findByUsername("musician a").getFirstName());//firstname a
         System.out.println(UserRepo.findByUsername("musician a").getLastName());//lastname a
@@ -278,7 +299,7 @@ public class BandtitoApplication {
 
         bandManagement.emptyPosition(bandUuid);
 
-        System.out.println(((Musician) UserRepo.findByUsername("musician a")).getYearsInBand().toString());
+        System.out.println(((Musician) UserRepo.findByUsername("musician a")).getYearsInBand().toString());*/
 
     }
 }
