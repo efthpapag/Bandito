@@ -34,6 +34,14 @@ public class UserManagement {
 
     //private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
+    //Find if user exists
+    public Boolean findUser(String username){
+        if(UserRepo.findByUsername(username) == null){
+            return false;
+        }
+        return true;
+    }
+
     //Log in user
     public User logInUser(String username, String password){
 

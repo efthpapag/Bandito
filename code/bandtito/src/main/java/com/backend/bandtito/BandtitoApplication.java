@@ -107,7 +107,7 @@ public class BandtitoApplication {
         //instument = new Instrument("instument b");
         //InstrumentRepo.save(instument);
 
-        /*instrumentManagement.createInstument("instument a", "a");
+        instrumentManagement.createInstument("instument a", "a");
         instrumentManagement.createInstument("instument b", "b");
 
         System.out.println("create instuments");
@@ -237,7 +237,7 @@ public class BandtitoApplication {
 
         bandManagement.rateBand("employer a", "band a", 5);
 
-        System.out.println("rate band");*/
+        System.out.println("rate band");
 
 
         

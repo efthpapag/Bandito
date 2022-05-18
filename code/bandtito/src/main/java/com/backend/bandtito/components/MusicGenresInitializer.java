@@ -26,5 +26,4 @@ public class MusicGenresInitializer {
         System.out.println("musicgenre");
 
     }
-    
 }

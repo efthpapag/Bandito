@@ -1,10 +1,12 @@
 package com.backend.bandtito.controllers;
 
 import com.backend.bandtito.components.UserManagement;
+import com.backend.bandtito.models.User;
 import com.backend.bandtito.utils.EmployerRequestBody;
 import com.backend.bandtito.utils.LogInRequestBody;
 import com.backend.bandtito.utils.MusicGenreRequestBody;
 import com.backend.bandtito.utils.MusicianRequestBody;
+import com.backend.bandtito.utils.UsernameRequestBody;
 import com.backend.bandtito.utils.UuidRequestBody;
 import com.backend.bandtito.utils.YearsOfExperienceRequestBody;
 
@@ -25,13 +27,35 @@ public class UserController {
     @PostMapping(path = "/log-in")
     public ResponseEntity<String> lo9gInUser(@RequestBody LogInRequestBody data) {
 
-        userManagement.logInUser(data.getUsername(), data.getPassword());
+        User user = userManagement.logInUser(data.getUsername(), data.getPassword());
 
         System.out.println("----------------------------------------------------------------------");
         System.out.println("Log In");
+        System.out.println(data.getUsername());
         System.out.println(data.getPassword());
 
-        return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        if(user != null){
+            user.getUsername();
+            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+        }
+        System.out.println("no such user");
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @PostMapping(path = "/find-if-user-exists")
+    public ResponseEntity<String> lo9gInUser(@RequestBody UsernameRequestBody data) {
+
+        System.out.println("----------------------------------------------------------------------");
+        System.out.println("find-if-user-exists");
+        System.out.println(data.getUsername());
+
+        if(userManagement.findUser(data.getUsername())){
+            System.out.println("exists");
+            return new ResponseEntity<>(HttpStatus.FOUND);
+            
+        }
+        System.out.println("does not exists");
+        return new ResponseEntity<>(HttpStatus.CONTINUE);
     }
 
     @PostMapping(path = "/register-musician")

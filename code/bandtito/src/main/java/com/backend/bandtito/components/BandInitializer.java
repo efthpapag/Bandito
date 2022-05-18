@@ -98,8 +98,7 @@ public class BandInitializer {
             for(int i = 0; i < inNum; i++){
                 rnd = new Random().nextInt(Instuments.size());
                 BandPosition bandPosition = bandManagement.createBandPosition(Instuments.get(rnd).getName(), band.getName());
-                Random rand = new Random();
-                if (rand.nextInt(2) == 0) {
+                if (/*rand.nextInt(2) == 0*/true) {
 
                     List<User> mp = new ArrayList<>();
                     mp = UserRepo.findAll();
