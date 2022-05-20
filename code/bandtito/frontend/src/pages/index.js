@@ -72,12 +72,12 @@ function ModalLogIn(props) {
 }
 
 async function find(){
-
+/*
   console.log("hi")
 
   var myHeaders = new Headers()
-    myHeaders.append("Accept", "*/*")
-    myHeaders.append("Content-type", "application/json")
+    *///myHeaders.append("Accept", "*/*")
+    /*myHeaders.append("Content-type", "application/json")
 
     var requestOptions = {
         method: 'POST',
@@ -101,9 +101,9 @@ async function find(){
         else{
 
         }
-  })
+  })*/
 }
-
+/*
 function ModalRegisterMusitican(props) {
 
   const register = () => registerMusician();
@@ -175,7 +175,7 @@ function ModalRegisterEmployer(props) {
 }
 
 
-
+*/
 
 
 const Home = () => {
@@ -184,7 +184,7 @@ const Home = () => {
   const [modalShowRM, setModalShowRM] = React.useState(false);
   const [modalShowRE, setModalShowRE] = React.useState(false);
 
-
+/*
   return (
     <div className="bg-primary App">
     <Container fluid style={{ paddingLeft: 0, paddingRight: 0}}>
@@ -195,9 +195,9 @@ const Home = () => {
         <Col style={{ paddingLeft: 0, paddingRight: 0 }}>
           <h1 className="text-warning" style={{ marginTop: "2rem", marginBottom: "8rem"}}>MUSIC BRINGS US TOGETHER</h1>
           <h2 className="text-light">JOIN US TODAY</h2>
-          <Button variant="secondary" style={{ marginTop: "2rem", marginBottom: "2rem"}} onClick={() => setModalShowR(true)}>I AM A MUSICIAN</Button>{' '}
+          <Button variant="secondary" style={{ marginTop: "2rem", marginBottom: "2rem"}} onClick={() => setModalShowRM(true)}>I AM A MUSICIAN</Button>{' '}
           <Col style={{ paddingLeft: 0, paddingRight: 0 }}>
-            <Button variant="secondary" style={{ marginTop: "2rem", marginBottom: "7rem"}} onClick={() => setModalShowR(true)}>I AM LOOKING FOR BANDS TO HIRE</Button>{' '}
+            <Button variant="secondary" style={{ marginTop: "2rem", marginBottom: "7rem"}} onClick={() => setModalShowRE(true)}>I AM LOOKING FOR BANDS TO HIRE</Button>{' '}
           </Col>
           <h2 className="text-light">ALREADY A MEMBER ?</h2>
           <Button variant="secondary" style={{ marginTop: "2rem", marginBottom: "13rem"}} onClick={() => setModalShowL(true)}>LOG IN</Button>{' '}
@@ -232,9 +232,8 @@ const Home = () => {
 
     <footer style={{ position: "fixed", width: "100%" }} className="bg-secondary text-light"><p>Contact : bandito@gmail.com</p></footer>
   </div>
-  );
+  );*/
 };
-
 
   
 export default Home;

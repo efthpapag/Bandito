@@ -1,6 +1,8 @@
 package com.backend.bandtito;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -17,6 +19,7 @@ import com.backend.bandtito.components.JobManagement;
 import com.backend.bandtito.components.MusicGenreManagement;
 import com.backend.bandtito.components.MusicGenresInitializer;
 import com.backend.bandtito.components.MusiciansInitializer;
+import com.backend.bandtito.components.SearchMusicianManagement;
 import com.backend.bandtito.components.UserManagement;
 import com.backend.bandtito.models.Band;
 import com.backend.bandtito.models.BandPosition;
@@ -81,13 +84,15 @@ public class BandtitoApplication {
     private MusiciansInitializer musiciansInitializer;
     @Autowired
     private BandInitializer bandInitializer;
+    @Autowired
+    private SearchMusicianManagement searchMusicianManagement;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BandtitoApplication.class, args);
 	}
 
 	@PostConstruct
-    public void init() throws InterruptedException{
+    public void init() throws InterruptedException, IOException{
 
         instrumentInitializer.init();
         System.out.println("--------------------------------------------");
@@ -97,6 +102,8 @@ public class BandtitoApplication {
         System.out.println("--------------------------------------------");
         bandInitializer.init();
         System.out.println("--------------------------------------------");
+        List<String> listOfGenres = Arrays.asList("Rock");
+        searchMusicianManagement.searchForMusician("a", listOfGenres, "Saxophone", 60, 4000, 400, 400, -1, -1, -1, -1);
 
         //test
 
