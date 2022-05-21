@@ -1,5 +1,8 @@
 package com.backend.bandtito;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -102,8 +105,7 @@ public class BandtitoApplication {
         System.out.println("--------------------------------------------");
         bandInitializer.init();
         System.out.println("--------------------------------------------");
-        List<String> listOfGenres = Arrays.asList("Rock");
-        searchMusicianManagement.searchForMusician("a", listOfGenres, "Saxophone", 60, 4000, 400, 400, -1, -1, -1, -1);
+        
 
         //test
 
@@ -145,7 +147,7 @@ public class BandtitoApplication {
         //UserRepo.save(musician);
 
         userManagement.createMusician("musician a", "firstname a", "lastname a", "password a", "address a", 20, 
-        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"), "a");
+        Arrays.asList("Saxophone"), Arrays.asList(2), Arrays.asList("Rock", "musicGenre b"), "a");
         userManagement.createMusician("musician b", "firstname b", "lastname b", "password b", "address b", 30, 
         Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"), "b");
         userManagement.createMusician("musician c", "firstname c", "lastname c", "password c", "address c", 40, 
@@ -307,6 +309,9 @@ public class BandtitoApplication {
         bandManagement.emptyPosition(bandUuid);
 
         System.out.println(((Musician) UserRepo.findByUsername("musician a")).getYearsInBand().toString());*/
+
+        List<String> listOfGenres = Arrays.asList("Rock");
+        searchMusicianManagement.searchForMusician("a", listOfGenres, "Saxophone", 60, 4000, 400, 400, -1, -1, -1, -1);
 
     }
 }

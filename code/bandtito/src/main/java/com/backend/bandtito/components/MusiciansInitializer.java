@@ -44,7 +44,7 @@ public class MusiciansInitializer {
         BufferedReader reader;
 		try {
 			reader = new BufferedReader(new FileReader(
-					"C:/Users/Efthimis/Desktop/Bandito/Bandito/code/bandtito/src/main/java/com/backend/bandtito/components/texts/firstNames.txt"));
+					"../initializer_texts/firstNames.txt"));
 			String line = reader.readLine();
 			while (line != null) {
 				//System.out.println(line);
@@ -58,7 +58,7 @@ public class MusiciansInitializer {
 
         try {
 			reader = new BufferedReader(new FileReader(
-					"C:/Users/Efthimis/Desktop/Bandito/Bandito/code/bandtito/src/main/java/com/backend/bandtito/components/texts/surnames.txt"));
+					"../initializer_texts/surnames.txt"));
 			String line = reader.readLine();
 			while (line != null) {
 				//System.out.println(line);
@@ -76,7 +76,7 @@ public class MusiciansInitializer {
         }
 
 
-        for(int j = 0; j < 50; j++){
+        for(int j = 0; j < 700; j++){
 
             int rnd = new Random().nextInt(firstNames.size());
             String firstname = firstNames.get(rnd);

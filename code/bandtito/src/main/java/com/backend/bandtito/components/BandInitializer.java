@@ -43,7 +43,7 @@ public class BandInitializer {
         BufferedReader reader;
 		try {
 			reader = new BufferedReader(new FileReader(
-					"C:/Users/Efthimis/Desktop/Bandito/Bandito/code/bandtito/src/main/java/com/backend/bandtito/components/texts/bandnames.txt"));
+					"../initializer_texts/bandnames.txt"));
 			String line = reader.readLine();
 			while (line != null) {
 				//System.out.println(line);
