@@ -72,12 +72,12 @@ function ModalLogIn(props) {
 }
 
 async function find(){
-/*
+
   console.log("hi")
 
   var myHeaders = new Headers()
-    *///myHeaders.append("Accept", "*/*")
-    /*myHeaders.append("Content-type", "application/json")
+    myHeaders.append("Accept", "*/*")
+    myHeaders.append("Content-type", "application/json")
 
     var requestOptions = {
         method: 'POST',
@@ -88,22 +88,26 @@ async function find(){
         })
     };
 
-  fetch("http://localhost:9090/log-in", requestOptions)
+  fetch("http://localhost:9090/find-if-user-exists", requestOptions)
     .then(async response => {
-        const isJson = response.headers.get('content-type')?.includes('application/json');
-
-        if(response.status == 302){
-          alert("User already exists")
-        }
-        else  if(isMusician){
-          
-        }
-        else{
-
-        }
-  })*/
+      const isJson = response.headers.get('content-type')?.includes('application/json');
+      console.log("hi")
+      if(response.status == 302){
+        alert("User already exists")
+        console.log("hi")
+        return true
+      }
+      else{
+        console.log("hi")
+        return false
+      }
+  })
 }
-/*
+
+async function registerMusician(){
+
+}
+
 function ModalRegisterMusitican(props) {
 
   const register = () => registerMusician();
@@ -117,7 +121,7 @@ function ModalRegisterMusitican(props) {
     >
       <Modal.Header closeButton className="bg-primary">
         <Modal.Title id="contained-modal-title-vcenter" className="bg-primary text-light">
-          Register
+          Register As Musician
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="bg-primary">
@@ -130,6 +134,14 @@ function ModalRegisterMusitican(props) {
             <Form.Label className="text-light">Password</Form.Label>
             <Form.Control type="password" placeholder="Password" className="bg-primary text-light"/>
           </Form.Group>
+          <Form.Group className="mb-3" controlId="formFirstName">
+            <Form.Label className="text-light">First Name</Form.Label>
+            <Form.Control type="text" placeholder="First Name" className="bg-primary text-light"/>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formLastname">
+            <Form.Label className="text-light">Lastname</Form.Label>
+            <Form.Control type="text" placeholder="Lastname" className="bg-primary text-light"/>
+          </Form.Group>
           <Button variant="secondary" type="submit" onClick={register}>
             Next
           </Button>
@@ -137,6 +149,80 @@ function ModalRegisterMusitican(props) {
       </Modal.Body>
     </Modal>
   );
+}
+
+async function registerEmployer(){
+  let found = false
+
+  let p1 = document.getElementById('formBasicPassword');
+  let p2 = document.getElementById('formPasswordConfirmation');
+  if (p1.value!=p2.value){
+      p2.setCustomValidity('Passwords dont match');
+  }else{
+    p2.setCustomValidity('');
+
+    console.log(document.getElementById("formFirstName").value)
+    let fn = document.getElementById("formFirstName").value
+
+
+    /*var myHeaders = new Headers()
+    myHeaders.append("Accept", "")
+    /*myHeaders.append("Content-type", "application/json")
+
+    var requestOptions = {
+        method: 'POST',
+        mode : 'cors',
+        headers: myHeaders,
+        body: JSON.stringify({
+            "username": document.getElementById("formUsername").value
+        })
+    };*/
+
+    /*fetch("http://localhost:9090/find-if-user-exists", requestOptions)
+      .then(async response => {
+        const isJson = response.headers.get('content-type')?.includes('application/json');
+        console.log("hi")
+        if(response.status == 302){
+          alert("User already exists")
+          console.log("found")
+          found = true
+        }
+        else{
+          console.log("not found")
+          found = false
+        }
+    })
+
+    if(!found){*/
+
+      var myHeaders = new Headers()
+      myHeaders.append("Accept", "*/*")
+      myHeaders.append("Content-type", "application/json")
+
+      var requestOptions = {
+          method: 'POST',
+          mode : 'cors',
+          headers: myHeaders,
+          body: JSON.stringify({
+            "username": document.getElementById("formUsername").value,
+            "firstname": document.getElementById("formFirstName").value,
+            "lastname": document.getElementById("formLastname").value,
+            "password": document.getElementById("formBasicPassword").value,
+            "profilePic": document.getElementById("formUsername").value
+            //TO DO : send png file to server
+          })
+      };
+
+      fetch("http://localhost:9090/register-employer", requestOptions)
+        .then(async response => {
+          const isJson = response.headers.get('content-type')?.includes('application/json');
+
+          if(response.status == 201){
+            alert("Employer created")
+          }
+      })
+    }
+  //}
 }
 
 function ModalRegisterEmployer(props) {
@@ -152,18 +238,34 @@ function ModalRegisterEmployer(props) {
     >
       <Modal.Header closeButton className="bg-primary">
         <Modal.Title id="contained-modal-title-vcenter" className="bg-primary text-light">
-          Register
+          Register As Employer
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="bg-primary">
         <Form>
           <Form.Group className="mb-3" controlId="formUsername">
             <Form.Label className="text-light">Enter username</Form.Label>
-            <Form.Control type="Username" placeholder="Username" className="bg-primary text-light"/>
+            <Form.Control type="Username" placeholder="Username" className="bg-primary text-light" required/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label className="text-light">Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" className="bg-primary text-light"/>
+            <Form.Control type="password" placeholder="Password" className="bg-primary text-light" autocomplete="off"/>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formPasswordConfirmation">
+            <Form.Label className="text-light">Confirm Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" className="bg-primary text-light" required/>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formFirstName">
+            <Form.Label className="text-light">First Name</Form.Label>
+            <Form.Control type="text" placeholder="First Name" className="bg-primary text-light" required/>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formLastname">
+            <Form.Label className="text-light">Lastname</Form.Label>
+            <Form.Control type="text" placeholder="Last Name" className="bg-primary text-light" required/>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formProfilePic">
+            <Form.Label className="text-light">Profile Picture</Form.Label>
+            <Form.Control type="file" className="bg-primary text-light" required/>
           </Form.Group>
           <Button variant="secondary" type="submit" onClick={register}>
             Next
@@ -175,7 +277,7 @@ function ModalRegisterEmployer(props) {
 }
 
 
-*/
+
 
 
 const Home = () => {
@@ -184,7 +286,7 @@ const Home = () => {
   const [modalShowRM, setModalShowRM] = React.useState(false);
   const [modalShowRE, setModalShowRE] = React.useState(false);
 
-/*
+
   return (
     <div className="bg-primary App">
     <Container fluid style={{ paddingLeft: 0, paddingRight: 0}}>
@@ -232,7 +334,7 @@ const Home = () => {
 
     <footer style={{ position: "fixed", width: "100%" }} className="bg-secondary text-light"><p>Contact : bandito@gmail.com</p></footer>
   </div>
-  );*/
+  );
 };
 
   

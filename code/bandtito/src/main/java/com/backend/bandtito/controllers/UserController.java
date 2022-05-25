@@ -105,17 +105,23 @@ public class UserController {
     @PostMapping(path = "/register-employer")
     public ResponseEntity<String> registerEmployerr(@RequestBody EmployerRequestBody data) {
 
-        userManagement.createEmployer(data.getUsername(), data.getFirstName(), data.getLastName(), data.getPassword(), data.getProfilePic());
 
+        if(userManagement.findUser(data.getUsername())){
+            System.out.println("exists");        
+            return new ResponseEntity<>(HttpStatus.OK);
+        }
+
+        System.out.println("does not exists");
+        userManagement.createEmployer(data.getUsername(), data.getFirstName(), data.getLastName(), data.getPassword(), data.getProfilePic());
         System.out.println("----------------------------------------------------------------------");
         System.out.println("employer created");
         System.out.println(data.getUsername());
         System.out.println(data.getFirstName());
-        System.out.println(data.getLastName());
+        System.out.println(data.getLastName()); 
         System.out.println(data.getPassword());
         System.out.println(data.getProfilePic());
-
         return new ResponseEntity<>(HttpStatus.CREATED);
+
     }
 
     @PostMapping(path = "/edit-employer")

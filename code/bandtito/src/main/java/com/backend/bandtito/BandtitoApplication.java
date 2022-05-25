@@ -101,10 +101,10 @@ public class BandtitoApplication {
         System.out.println("--------------------------------------------");
         musicGenresInitializer.init();
         System.out.println("--------------------------------------------");
-        musiciansInitializer.init();
-        System.out.println("--------------------------------------------");
-        bandInitializer.init();
-        System.out.println("--------------------------------------------");
+        //musiciansInitializer.init();
+        //System.out.println("--------------------------------------------");
+        //bandInitializer.init();
+        //System.out.println("--------------------------------------------");
         
 
         //test
@@ -146,7 +146,7 @@ public class BandtitoApplication {
         //musician = new Musician("musician d", "firstname d", "lastname d", "password d", "address d", 50, musicGenresSet);
         //UserRepo.save(musician);
 
-        userManagement.createMusician("musician a", "firstname a", "lastname a", "password a", "address a", 20, 
+        userManagement.createMusician("musician a", "firstname a", "lastname a", "a", "address a", 20, 
         Arrays.asList("Saxophone"), Arrays.asList(2), Arrays.asList("Rock", "musicGenre b"), "a");
         userManagement.createMusician("musician b", "firstname b", "lastname b", "password b", "address b", 30, 
         Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"), "b");

@@ -130,6 +130,7 @@ public class UserManagement {
 
     //create employer
     public Employer createEmployer(String username, String firstname, String lastname, String password, String profilePic){
+        System.out.println("created");
         Employer employer = new Employer(username, firstname, lastname, /*passwordEncoder.encode(*/password/*)*/, profilePic);
         UserRepo.save(employer);
         return employer;
