@@ -6,7 +6,6 @@ import com.backend.bandtito.utils.EmployerRequestBody;
 import com.backend.bandtito.utils.LogInRequestBody;
 import com.backend.bandtito.utils.MusicGenreRequestBody;
 import com.backend.bandtito.utils.MusicianRequestBody;
-import com.backend.bandtito.utils.UsernameRequestBody;
 import com.backend.bandtito.utils.UuidRequestBody;
 import com.backend.bandtito.utils.YearsOfExperienceRequestBody;
 
@@ -40,22 +39,6 @@ public class UserController {
         }
         System.out.println("no such user");
         return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-    @PostMapping(path = "/find-if-user-exists")
-    public ResponseEntity<String> lo9gInUser(@RequestBody UsernameRequestBody data) {
-
-        System.out.println("----------------------------------------------------------------------");
-        System.out.println("find-if-user-exists");
-        System.out.println(data.getUsername());
-
-        if(userManagement.findUser(data.getUsername())){
-            System.out.println("exists");
-            return new ResponseEntity<>(HttpStatus.FOUND);
-            
-        }
-        System.out.println("does not exists");
-        return new ResponseEntity<>(HttpStatus.CONTINUE);
     }
 
     @PostMapping(path = "/register-musician")

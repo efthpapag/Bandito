@@ -6,6 +6,11 @@ import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import '../custom.scss';
+import { Link } from 'react-router-dom';
+
+import {useCallback} from 'react';
+import {useNavigate} from 'react-router-dom';
+
 
 async function checkLogIn(){
 
@@ -27,7 +32,7 @@ async function checkLogIn(){
     .then(async response => {
         const isJson = response.headers.get('content-type')?.includes('application/json');
 
-        if(response.status == 202){
+        if(response.status === 202){
           alert("Corect credentials")
         }
         else{
@@ -71,38 +76,6 @@ function ModalLogIn(props) {
   );
 }
 
-async function find(){
-
-  console.log("hi")
-
-  var myHeaders = new Headers()
-    myHeaders.append("Accept", "*/*")
-    myHeaders.append("Content-type", "application/json")
-
-    var requestOptions = {
-        method: 'POST',
-        mode : 'cors',
-        headers: myHeaders,
-        body: JSON.stringify({
-            "username": document.getElementById("formUsername").value
-        })
-    };
-
-  fetch("http://localhost:9090/find-if-user-exists", requestOptions)
-    .then(async response => {
-      const isJson = response.headers.get('content-type')?.includes('application/json');
-      console.log("hi")
-      if(response.status == 302){
-        alert("User already exists")
-        console.log("hi")
-        return true
-      }
-      else{
-        console.log("hi")
-        return false
-      }
-  })
-}
 
 async function registerMusician(){
 
@@ -134,11 +107,11 @@ function ModalRegisterMusitican(props) {
             <Form.Label className="text-light">Password</Form.Label>
             <Form.Control type="password" placeholder="Password" className="bg-primary text-light"/>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formFirstName">
+          <Form.Group className="mb-3" controlId="formFirstNameM">
             <Form.Label className="text-light">First Name</Form.Label>
             <Form.Control type="text" placeholder="First Name" className="bg-primary text-light"/>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formLastname">
+          <Form.Group className="mb-3" controlId="formLastnameM">
             <Form.Label className="text-light">Lastname</Form.Label>
             <Form.Control type="text" placeholder="Lastname" className="bg-primary text-light"/>
           </Form.Group>
@@ -156,73 +129,41 @@ async function registerEmployer(){
 
   let p1 = document.getElementById('formBasicPassword');
   let p2 = document.getElementById('formPasswordConfirmation');
-  if (p1.value!=p2.value){
+  if (p1.value!==p2.value){
       p2.setCustomValidity('Passwords dont match');
   }else{
     p2.setCustomValidity('');
 
     console.log(document.getElementById("formFirstName").value)
-    let fn = document.getElementById("formFirstName").value
 
-
-    /*var myHeaders = new Headers()
-    myHeaders.append("Accept", "")
-    /*myHeaders.append("Content-type", "application/json")
+    var myHeaders = new Headers()
+    myHeaders.append("Accept", "*/*")
+    myHeaders.append("Content-type", "application/json")
 
     var requestOptions = {
         method: 'POST',
         mode : 'cors',
         headers: myHeaders,
         body: JSON.stringify({
-            "username": document.getElementById("formUsername").value
+          "username": document.getElementById("formUsername").value,
+          //TO DO : first and last names are send as null
+          "firstname": document.getElementById("formFirstName").value,
+          "lastname": document.getElementById("formLastname").value,
+          "password": document.getElementById("formBasicPassword").value,
+          "profilePic": document.getElementById("formUsername").value
+          //TO DO : send png file to server
         })
-    };*/
+    };
 
-    /*fetch("http://localhost:9090/find-if-user-exists", requestOptions)
+    fetch("http://localhost:9090/register-employer", requestOptions)
       .then(async response => {
         const isJson = response.headers.get('content-type')?.includes('application/json');
-        console.log("hi")
-        if(response.status == 302){
-          alert("User already exists")
-          console.log("found")
-          found = true
-        }
-        else{
-          console.log("not found")
-          found = false
+
+        if(response.status === 201){
+          alert("Employer created")
         }
     })
-
-    if(!found){*/
-
-      var myHeaders = new Headers()
-      myHeaders.append("Accept", "*/*")
-      myHeaders.append("Content-type", "application/json")
-
-      var requestOptions = {
-          method: 'POST',
-          mode : 'cors',
-          headers: myHeaders,
-          body: JSON.stringify({
-            "username": document.getElementById("formUsername").value,
-            "firstname": document.getElementById("formFirstName").value,
-            "lastname": document.getElementById("formLastname").value,
-            "password": document.getElementById("formBasicPassword").value,
-            "profilePic": document.getElementById("formUsername").value
-            //TO DO : send png file to server
-          })
-      };
-
-      fetch("http://localhost:9090/register-employer", requestOptions)
-        .then(async response => {
-          const isJson = response.headers.get('content-type')?.includes('application/json');
-
-          if(response.status == 201){
-            alert("Employer created")
-          }
-      })
-    }
-  //}
+  }
 }
 
 function ModalRegisterEmployer(props) {
@@ -257,11 +198,11 @@ function ModalRegisterEmployer(props) {
           </Form.Group>
           <Form.Group className="mb-3" controlId="formFirstName">
             <Form.Label className="text-light">First Name</Form.Label>
-            <Form.Control type="text" placeholder="First Name" className="bg-primary text-light" required/>
+            <Form.Control type="Username" placeholder="First Name" className="bg-primary text-light" required/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formLastname">
             <Form.Label className="text-light">Lastname</Form.Label>
-            <Form.Control type="text" placeholder="Last Name" className="bg-primary text-light" required/>
+            <Form.Control type="Username" placeholder="Last Name" className="bg-primary text-light" required/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formProfilePic">
             <Form.Label className="text-light">Profile Picture</Form.Label>
@@ -278,13 +219,19 @@ function ModalRegisterEmployer(props) {
 
 
 
-
+function test1(){
+  window.open("/aboutUs", "_self")
+}
 
 const Home = () => {
 
   const [modalShowL, setModalShowL] = React.useState(false);
   const [modalShowRM, setModalShowRM] = React.useState(false);
   const [modalShowRE, setModalShowRE] = React.useState(false);
+  const test = () => test1();
+
+  const navigate = useNavigate();
+  const handleOnClick = useCallback(() => navigate('/aboutUs', {replace: true}), [navigate]);
 
 
   return (
@@ -302,17 +249,7 @@ const Home = () => {
             <Button variant="secondary" style={{ marginTop: "2rem", marginBottom: "7rem"}} onClick={() => setModalShowRE(true)}>I AM LOOKING FOR BANDS TO HIRE</Button>{' '}
           </Col>
           <h2 className="text-light">ALREADY A MEMBER ?</h2>
-          <Button variant="secondary" style={{ marginTop: "2rem", marginBottom: "13rem"}} onClick={() => setModalShowL(true)}>LOG IN</Button>{' '}
-          <Container fluid style={{ paddingLeft: 0, paddingRight: 0}}>
-            <Row style={{ marginLeft: 0, marginRight: 0 }}>
-              <Col style={{ paddingLeft: 0, paddingRight: 0 }}>
-                <a className="link-danger" href="/aboutus">ABOUT US</a>
-              </Col>
-              <Col style={{ paddingLeft: 0, paddingRight: 0 }}>
-                <a className="link-danger" href="/help">HELP</a>
-              </Col>
-            </Row>
-          </Container>
+          <Button variant="secondary" style={{ marginTop: "2rem", marginBottom: "13rem"}} onClick={handleOnClick}>LOG IN</Button>{' '}
         </Col>
       </Row>
     </Container>

@@ -1,15 +1,14 @@
 import React from 'react';
   
-const AboutUs = () => {
+const MusicianMain = () => {
   return (
     <div className="bg-primary">
       <h1 className="text-warning">About us</h1>
       <p className="text-light">Created by : 
-        Efthimios Papageorgiou
-        Ioannis Kakatsos
+      MusicianMain
       </p>
     </div>
   );
 };
   
-export default AboutUs;
+export default MusicianMain;
