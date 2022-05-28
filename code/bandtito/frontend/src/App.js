@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Routes, Route}
 import Home from './pages';
 import Help from './pages/help';
 import AboutUs from './pages/aboutUs';
+import MusicianMain from './pages/musicianMain.js';
   
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
             <Route exact path='/' element={<Home />} />
             <Route path='/help' element={<Help/>} />
             <Route path='/aboutUs' element={<AboutUs/>} />
+            <Route path='/musicianMain' element={<MusicianMain/>} />
         </Routes>
       </Router>
   );

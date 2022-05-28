@@ -16,8 +16,6 @@ import com.backend.bandtito.repositories.UserRepository;
 import com.backend.bandtito.repositories.YearsOfExperienceRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-//import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -31,8 +29,6 @@ public class UserManagement {
     private MusicGenreRepository MusicGenreRepo;
     @Autowired
     private YearsOfExperienceRepository YearsOfExperienceRepo;
-
-    //private PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     //Find if user exists
     public Boolean findUser(String username){

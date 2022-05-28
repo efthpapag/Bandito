@@ -11,8 +11,15 @@ import Select from 'react-select';
 import {useCallback} from 'react';
 import {useNavigate} from 'react-router-dom';
 
+function useChangePage() {
+  const navigate = useNavigate();
+  useCallback(() => navigate('/musicianMain', {replace: true}), [navigate]);
+}
+
 
 async function checkLogIn(){
+
+  
 
   var myHeaders = new Headers()
     myHeaders.append("Accept", "*/*")
@@ -32,9 +39,17 @@ async function checkLogIn(){
     .then(async response => {
         const isJson = response.headers.get('content-type')?.includes('application/json');
 
-        if(response.status === 202){
-          alert("Corect credentials")
+        //is musician
+        if(response.status === 201){
+          alert("is musician")
+          //useChangePage()
         }
+        //is employer
+        else if(response.status === 202){
+          alert("is employer")
+          //useChangePage()
+        }
+        //does not exist
         else{
             alert("Wrong credentials")
         }
@@ -351,6 +366,8 @@ const Home = () => {
   const navigate = useNavigate();
   const aboutUs = useCallback(() => navigate('/aboutUs', {replace: true}), [navigate]);
   const help = useCallback(() => navigate('/help', {replace: true}), [navigate]);
+  const musicianMain = useCallback(() => navigate('/musicianMain', {replace: true}), [navigate]);
+
 
 
   return (

@@ -1,6 +1,8 @@
 package com.backend.bandtito.controllers;
 
 import com.backend.bandtito.components.UserManagement;
+import com.backend.bandtito.models.Employer;
+import com.backend.bandtito.models.Musician;
 import com.backend.bandtito.models.User;
 import com.backend.bandtito.utils.EmployerRequestBody;
 import com.backend.bandtito.utils.LogInRequestBody;
@@ -24,7 +26,7 @@ public class UserController {
     private UserManagement userManagement;
 
     @PostMapping(path = "/log-in")
-    public ResponseEntity<String> lo9gInUser(@RequestBody LogInRequestBody data) {
+    public ResponseEntity<?> lo9gInUser(@RequestBody LogInRequestBody data) {
 
         User user = userManagement.logInUser(data.getUsername(), data.getPassword());
 
@@ -33,12 +35,19 @@ public class UserController {
         System.out.println(data.getUsername());
         System.out.println(data.getPassword());
 
-        if(user != null){
+        if(user instanceof Employer){
+            System.out.println("Employer");
             user.getUsername();
-            return new ResponseEntity<>(HttpStatus.ACCEPTED);
+            return new ResponseEntity<>(null, HttpStatus.ACCEPTED);
         }
-        System.out.println("no such user");
-        return new ResponseEntity<>(HttpStatus.OK);
+        else if(user instanceof Musician){
+            System.out.println("Musician");
+            return new ResponseEntity<>(null, HttpStatus.CREATED);
+        }
+        else{
+            System.out.println("Not found");
+            return new ResponseEntity<>(null, HttpStatus.OK);
+        }
     }
 
     @PostMapping(path = "/register-musician")
@@ -60,7 +69,7 @@ public class UserController {
         System.out.println(data.getMusicGenres());
         System.out.println(data.getProfilePic());
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/edit-musician")
@@ -82,7 +91,7 @@ public class UserController {
         System.out.println(data.getMusicGenres());
         System.out.println(data.getProfilePic());
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PostMapping(path = "/register-employer")
@@ -91,7 +100,7 @@ public class UserController {
 
         if(userManagement.findUser(data.getUsername())){
             System.out.println("exists");        
-            return new ResponseEntity<>(HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
 
         System.out.println("does not exists");
@@ -103,7 +112,7 @@ public class UserController {
         System.out.println(data.getLastName()); 
         System.out.println(data.getPassword());
         System.out.println(data.getProfilePic());
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
 
     }
 
@@ -120,7 +129,7 @@ public class UserController {
         System.out.println(data.getPassword());
         System.out.println(data.getProfilePic());
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PostMapping(path = "/add-instrument")
@@ -134,7 +143,7 @@ public class UserController {
         System.out.println(data.getMusician());
         System.out.println(data.getInstument());
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/remove-instrument")
@@ -146,7 +155,7 @@ public class UserController {
         System.out.println("instrument removed");
         System.out.println(data.getUuid());
 
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 
     @PostMapping(path = "/add-music-genre")
@@ -159,7 +168,7 @@ public class UserController {
         System.out.println(data.getMusician());
         System.out.println(data.getMusicGenre());
 
-        return new ResponseEntity<>(HttpStatus.CREATED);
+        return new ResponseEntity<>(null, HttpStatus.CREATED);
     }
 
     @PostMapping(path = "/remove-music-genre")
@@ -172,6 +181,6 @@ public class UserController {
         System.out.println(data.getMusician());
         System.out.println(data.getMusicGenre());
         
-        return new ResponseEntity<>(HttpStatus.OK);
+        return new ResponseEntity<>(null, HttpStatus.OK);
     }
 }
