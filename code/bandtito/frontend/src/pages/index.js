@@ -11,19 +11,18 @@ import Select from 'react-select';
 import {useCallback} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-function useChangePage() {
-  const navigate = useNavigate();
-  useCallback(() => navigate('/musicianMain', {replace: true}), [navigate]);
+const GoToMain = () => {
+  useNavigate('/musicianMain');
 }
 
 
 async function checkLogIn(){
 
-  
+  GoToMain()
 
-  var myHeaders = new Headers()
-    myHeaders.append("Accept", "*/*")
-    myHeaders.append("Content-type", "application/json")
+  /*var myHeaders = new Headers()
+    myHeaders.append("Accept", "*///*")
+    /*myHeaders.append("Content-type", "application/json")
 
     var requestOptions = {
         method: 'POST',
@@ -51,14 +50,70 @@ async function checkLogIn(){
         }
         //does not exist
         else{
-            alert("Wrong credentials")
+          alert("Wrong credentials")
         }
-  })
+  })*/
 }
 
 function ModalLogIn(props) {
 
+  let code = 0
+
   const login = () => checkLogIn();
+
+  const navigate = useNavigate();
+  const aboutUs = useCallback(() => navigate('/aboutUs', {replace: true}), [navigate]);
+
+
+  async function checkLogIn(){
+
+  
+    var myHeaders = new Headers()
+      myHeaders.append("Accept", "*/*")
+      myHeaders.append("Content-type", "application/json")
+  
+      var requestOptions = {
+          method: 'POST',
+          mode : 'cors',
+          headers: myHeaders,
+          body: JSON.stringify({
+              "username": document.getElementById("formUsername").value,
+              "password": document.getElementById("formBasicPassword").value,
+          })
+      };
+  
+    fetch("http://localhost:9090/log-in", requestOptions)
+      .then(async response => {
+          const isJson = response.headers.get('content-type')?.includes('application/json');
+
+          
+  
+          //is musician
+          if(response.status === 201){
+            alert("is musician")
+            code = 1
+            aboutUs()
+            //useChangePage()
+          }
+          //is employer
+          else if(response.status === 202){
+            code = 2
+            alert("is employer")
+            //useChangePage()
+          }
+          //does not exist
+          else{
+            alert("Wrong credentials")
+          }
+    })
+    /*if(code === 1){
+      aboutUs()
+    }
+    else if(code === 2){
+      aboutUs()
+    }*/
+    
+  }
 
   return (
     <Modal
@@ -366,8 +421,6 @@ const Home = () => {
   const navigate = useNavigate();
   const aboutUs = useCallback(() => navigate('/aboutUs', {replace: true}), [navigate]);
   const help = useCallback(() => navigate('/help', {replace: true}), [navigate]);
-  const musicianMain = useCallback(() => navigate('/musicianMain', {replace: true}), [navigate]);
-
 
 
   return (
