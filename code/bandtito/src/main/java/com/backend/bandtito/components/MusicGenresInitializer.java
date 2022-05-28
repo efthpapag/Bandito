@@ -19,7 +19,6 @@ public class MusicGenresInitializer {
         musicGenreManagement.createMusicGenre("Metal");
         musicGenreManagement.createMusicGenre("Classical");
         musicGenreManagement.createMusicGenre("Folk");
-        musicGenreManagement.createMusicGenre("R&B");
         musicGenreManagement.createMusicGenre("Punk");
         musicGenreManagement.createMusicGenre("Disco");
 

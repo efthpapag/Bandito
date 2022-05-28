@@ -1,12 +1,12 @@
-import { Component } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Image from 'react-bootstrap/Image'
 import Button from 'react-bootstrap/Button'
 import Modal from 'react-bootstrap/Modal'
 import Form from 'react-bootstrap/Form'
 import '../custom.scss';
-import { Link } from 'react-router-dom';
+
+import Select from 'react-select';
 
 import {useCallback} from 'react';
 import {useNavigate} from 'react-router-dom';
@@ -78,15 +78,92 @@ function ModalLogIn(props) {
 
 
 async function registerMusician(){
+  let found = false
 
+  let p1 = document.getElementById('formBasicPassword');
+  let p2 = document.getElementById('formPasswordConfirmation');
+  if (p1.value!==p2.value){
+      p2.setCustomValidity('Passwords dont match');
+  }else{
+    p2.setCustomValidity('');
+
+    console.log(document.getElementById("formFirstName").value)
+
+    var myHeaders = new Headers()
+    myHeaders.append("Accept", "*/*")
+    myHeaders.append("Content-type", "application/json")
+
+    var requestOptions = {
+        method: 'POST',
+        mode : 'cors',
+        headers: myHeaders,
+        body: JSON.stringify({
+          "username": document.getElementById("formUsername").value,
+          //TO DO : first and last names are send as null
+          "firstname": document.getElementById("formFirstName").value,
+          "lastname": document.getElementById("formLastname").value,
+          "password": document.getElementById("formBasicPassword").value,
+          "profilePic": document.getElementById("formUsername").value,
+          //TO DO : send png file to server
+          "address": document.getElementById("formAddresss").value,
+          "age": document.getElementById("formAge").value,
+          "listOfMusicGenres": document.getElementById("formGenres").value,
+          "listOfInstuments": document.getElementById("formInstruments").value,
+          //TO DO : select years of experience
+        })
+    };
+
+    fetch("http://localhost:9090/register-employer", requestOptions)
+      .then(async response => {
+        const isJson = response.headers.get('content-type')?.includes('application/json');
+
+        if(response.status === 201){
+          alert("Employer created")
+        }
+    })
+  }
 }
+
+const optionsGenres  = [
+  { value: "Rock", label: "Rock" },
+  { value: "Jazz", label: "Jazz" },
+  { value: "Country", label: "Country" },
+  { value: "Pop", label: "Pop" },
+  { value: "Blues", label: "Blues" },
+  { value: "Soul", label: "Soul" },
+  { value: "Metal", label: "Metal" },
+  { value: "Classical", label: "Classical" },
+  { value: "Folk", label: "Folk" },
+  { value: "Punk", label: "Punk" },
+  { value: "Disco", label: "Disco" }
+];
+
+const optionsInstruments  = [
+  { value: "Piano", label: "Piano" },
+  { value: "Guitar", label: "Guitar" },
+  { value: "Violin", label: "Violin" },
+  { value: "Drums", label: "Drums" },
+  { value: "Saxophone", label: "Saxophone" },
+  { value: "Flute", label: "Flute" },
+  { value: "Clarinet", label: "Clarinet" },
+  { value: "Cello", label: "Cello" },
+  { value: "Trumpet", label: "Trumpet" },
+  { value: "Voice", label: "Voice" },
+  { value: "Bass", label: "Bass" }
+];
 
 function ModalRegisterMusitican(props) {
 
   const register = () => registerMusician();
 
+  const [selectedOptionGenres, setSelectedOptionGenres] = useState(null);
+  const [selectedOptionInstruments, setSelectedOptionInstruments] = useState(null);
+
+  
+
   return (
     <Modal
+      scrollable={true}
       {...props}
       size="lg"
       aria-labelledby="contained-modal-title-vcenter"
@@ -101,20 +178,66 @@ function ModalRegisterMusitican(props) {
         <Form>
           <Form.Group className="mb-3" controlId="formUsername">
             <Form.Label className="text-light">Enter username</Form.Label>
-            <Form.Control type="Username" placeholder="Username" className="bg-primary text-light"/>
+            <Form.Control type="Username" placeholder="Username" className="bg-primary text-light" required/>
           </Form.Group>
           <Form.Group className="mb-3" controlId="formBasicPassword">
             <Form.Label className="text-light">Password</Form.Label>
-            <Form.Control type="password" placeholder="Password" className="bg-primary text-light"/>
+            <Form.Control type="password" placeholder="Password" className="bg-primary text-light" autocomplete="off"/>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formFirstNameM">
+          <Form.Group className="mb-3" controlId="formPasswordConfirmation">
+            <Form.Label className="text-light">Confirm Password</Form.Label>
+            <Form.Control type="password" placeholder="Password" className="bg-primary text-light" required/>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formFirstName">
             <Form.Label className="text-light">First Name</Form.Label>
-            <Form.Control type="text" placeholder="First Name" className="bg-primary text-light"/>
+            <Form.Control type="Username" placeholder="First Name" className="bg-primary text-light" required/>
           </Form.Group>
-          <Form.Group className="mb-3" controlId="formLastnameM">
+          <Form.Group className="mb-3" controlId="formLastname">
             <Form.Label className="text-light">Lastname</Form.Label>
-            <Form.Control type="text" placeholder="Lastname" className="bg-primary text-light"/>
+            <Form.Control type="Username" placeholder="Last Name" className="bg-primary text-light" required/>
           </Form.Group>
+          <Form.Group className="mb-3" controlId="formProfilePic">
+            <Form.Label className="text-light">Profile Picture</Form.Label>
+            <Form.Control type="file" className="bg-primary text-light" required/>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formAge">
+            <Form.Label className="text-light">Your age</Form.Label>
+            <Form.Control type="number" className="bg-primary text-light" min="18" required/>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formAddresss">
+            <Form.Label className="text-light">Addresss</Form.Label>
+            <Form.Control type="text" className="bg-primary text-light" required/>
+          </Form.Group>
+
+
+          <Form.Group className="mb-3" controlId="formGenres">
+            <Form.Label className="text-light">Music Genres</Form.Label>
+              <Select
+                isMulti
+                defaultValue={selectedOptionGenres}
+                closeMenuOnSelect={false}
+                hideSelectedOptions={false}
+                onChange={setSelectedOptionGenres}
+                options={optionsGenres}
+              />
+          </Form.Group>
+
+
+          <Form.Group className="mb-3" controlId="formInstruments">
+            <Form.Label className="text-light">Instruments</Form.Label>
+              <Select
+                isMulti
+                defaultValue={selectedOptionInstruments}
+                closeMenuOnSelect={false}
+                hideSelectedOptions={false}
+                onChange={setSelectedOptionInstruments}
+                options={optionsInstruments}
+              />
+          </Form.Group>
+
+
+          
+
           <Button variant="secondary" type="submit" onClick={register}>
             Next
           </Button>
@@ -219,19 +342,15 @@ function ModalRegisterEmployer(props) {
 
 
 
-function test1(){
-  window.open("/aboutUs", "_self")
-}
-
 const Home = () => {
 
   const [modalShowL, setModalShowL] = React.useState(false);
   const [modalShowRM, setModalShowRM] = React.useState(false);
   const [modalShowRE, setModalShowRE] = React.useState(false);
-  const test = () => test1();
 
   const navigate = useNavigate();
-  const handleOnClick = useCallback(() => navigate('/aboutUs', {replace: true}), [navigate]);
+  const aboutUs = useCallback(() => navigate('/aboutUs', {replace: true}), [navigate]);
+  const help = useCallback(() => navigate('/help', {replace: true}), [navigate]);
 
 
   return (
@@ -249,7 +368,17 @@ const Home = () => {
             <Button variant="secondary" style={{ marginTop: "2rem", marginBottom: "7rem"}} onClick={() => setModalShowRE(true)}>I AM LOOKING FOR BANDS TO HIRE</Button>{' '}
           </Col>
           <h2 className="text-light">ALREADY A MEMBER ?</h2>
-          <Button variant="secondary" style={{ marginTop: "2rem", marginBottom: "13rem"}} onClick={handleOnClick}>LOG IN</Button>{' '}
+          <Button variant="secondary" style={{ marginTop: "2rem", marginBottom: "11rem"}} onClick={() => setModalShowL(true)}>LOG IN</Button>{' '}
+          <Container fluid style={{ paddingLeft: 0, paddingRight: 0}}>
+            <Row style={{ marginLeft: 0, marginRight: 0 }}>
+              <Col style={{ paddingLeft: 0, paddingRight: 0 }}>
+                <Button variant="danger" onClick={aboutUs}>ABOUT US</Button>{' '}
+              </Col>
+              <Col style={{ paddingLeft: 0, paddingRight: 0 }}>
+                <Button variant="danger" onClick={help}>HELP</Button>{' '}
+              </Col>
+            </Row>
+          </Container>
         </Col>
       </Row>
     </Container>
