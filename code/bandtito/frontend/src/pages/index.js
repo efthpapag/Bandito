@@ -15,46 +15,6 @@ const GoToMain = () => {
   useNavigate('/musicianMain');
 }
 
-
-async function checkLogIn(){
-
-  GoToMain()
-
-  /*var myHeaders = new Headers()
-    myHeaders.append("Accept", "*///*")
-    /*myHeaders.append("Content-type", "application/json")
-
-    var requestOptions = {
-        method: 'POST',
-        mode : 'cors',
-        headers: myHeaders,
-        body: JSON.stringify({
-            "username": document.getElementById("formUsername").value,
-            "password": document.getElementById("formBasicPassword").value,
-        })
-    };
-
-  fetch("http://localhost:9090/log-in", requestOptions)
-    .then(async response => {
-        const isJson = response.headers.get('content-type')?.includes('application/json');
-
-        //is musician
-        if(response.status === 201){
-          alert("is musician")
-          //useChangePage()
-        }
-        //is employer
-        else if(response.status === 202){
-          alert("is employer")
-          //useChangePage()
-        }
-        //does not exist
-        else{
-          alert("Wrong credentials")
-        }
-  })*/
-}
-
 function ModalLogIn(props) {
 
   let code = 0
@@ -67,6 +27,7 @@ function ModalLogIn(props) {
 
   async function checkLogIn(){
 
+    aboutUs()
   
     var myHeaders = new Headers()
       myHeaders.append("Accept", "*/*")
@@ -86,13 +47,11 @@ function ModalLogIn(props) {
       .then(async response => {
           const isJson = response.headers.get('content-type')?.includes('application/json');
 
-          
-  
           //is musician
-          if(response.status === 201){
+          if(response.status === 200){
             alert("is musician")
             code = 1
-            aboutUs()
+            //aboutUs()
             //useChangePage()
           }
           //is employer
@@ -147,52 +106,7 @@ function ModalLogIn(props) {
 }
 
 
-async function registerMusician(){
-  let found = false
 
-  let p1 = document.getElementById('formBasicPassword');
-  let p2 = document.getElementById('formPasswordConfirmation');
-  if (p1.value!==p2.value){
-      p2.setCustomValidity('Passwords dont match');
-  }else{
-    p2.setCustomValidity('');
-
-    console.log(document.getElementById("formFirstName").value)
-
-    var myHeaders = new Headers()
-    myHeaders.append("Accept", "*/*")
-    myHeaders.append("Content-type", "application/json")
-
-    var requestOptions = {
-        method: 'POST',
-        mode : 'cors',
-        headers: myHeaders,
-        body: JSON.stringify({
-          "username": document.getElementById("formUsername").value,
-          //TO DO : first and last names are send as null
-          "firstname": document.getElementById("formFirstName").value,
-          "lastname": document.getElementById("formLastname").value,
-          "password": document.getElementById("formBasicPassword").value,
-          "profilePic": document.getElementById("formUsername").value,
-          //TO DO : send png file to server
-          "address": document.getElementById("formAddresss").value,
-          "age": document.getElementById("formAge").value,
-          "listOfMusicGenres": document.getElementById("formGenres").value,
-          "listOfInstuments": document.getElementById("formInstruments").value,
-          //TO DO : select years of experience
-        })
-    };
-
-    fetch("http://localhost:9090/register-employer", requestOptions)
-      .then(async response => {
-        const isJson = response.headers.get('content-type')?.includes('application/json');
-
-        if(response.status === 201){
-          alert("Employer created")
-        }
-    })
-  }
-}
 
 const optionsGenres  = [
   { value: "Rock", label: "Rock" },
@@ -223,6 +137,53 @@ const optionsInstruments  = [
 ];
 
 function ModalRegisterMusitican(props) {
+
+  async function registerMusician(){
+    let found = false
+  
+    let p1 = document.getElementById('formBasicPassword');
+    let p2 = document.getElementById('formPasswordConfirmation');
+    if (p1.value!==p2.value){
+        p2.setCustomValidity('Passwords dont match');
+    }else{
+      p2.setCustomValidity('');
+  
+      console.log(document.getElementById("formFirstName").value)
+  
+      var myHeaders = new Headers()
+      myHeaders.append("Accept", "*/*")
+      myHeaders.append("Content-type", "application/json")
+  
+      var requestOptions = {
+          method: 'POST',
+          mode : 'cors',
+          headers: myHeaders,
+          body: JSON.stringify({
+            "username": document.getElementById("formUsername").value,
+            //TO DO : first and last names are send as null
+            "firstname": document.getElementById("formFirstName").value,
+            "lastname": document.getElementById("formLastname").value,
+            "password": document.getElementById("formBasicPassword").value,
+            "profilePic": document.getElementById("formUsername").value,
+            //TO DO : send png file to server
+            "address": document.getElementById("formAddresss").value,
+            "age": document.getElementById("formAge").value,
+            "listOfMusicGenres": document.getElementById("formGenres").value,
+            "listOfInstuments": document.getElementById("formInstruments").value,
+            //TO DO : select years of experience
+          })
+      };
+  
+      fetch("http://localhost:9090/register-employer", requestOptions)
+        .then(async response => {
+          const isJson = response.headers.get('content-type')?.includes('application/json');
+  
+          if(response.status === 201){
+            alert("Employer created")
+          }
+      })
+    }
+  }
 
   const register = () => registerMusician();
 
@@ -317,49 +278,51 @@ function ModalRegisterMusitican(props) {
   );
 }
 
-async function registerEmployer(){
-  let found = false
 
-  let p1 = document.getElementById('formBasicPassword');
-  let p2 = document.getElementById('formPasswordConfirmation');
-  if (p1.value!==p2.value){
-      p2.setCustomValidity('Passwords dont match');
-  }else{
-    p2.setCustomValidity('');
-
-    console.log(document.getElementById("formFirstName").value)
-
-    var myHeaders = new Headers()
-    myHeaders.append("Accept", "*/*")
-    myHeaders.append("Content-type", "application/json")
-
-    var requestOptions = {
-        method: 'POST',
-        mode : 'cors',
-        headers: myHeaders,
-        body: JSON.stringify({
-          "username": document.getElementById("formUsername").value,
-          //TO DO : first and last names are send as null
-          "firstname": document.getElementById("formFirstName").value,
-          "lastname": document.getElementById("formLastname").value,
-          "password": document.getElementById("formBasicPassword").value,
-          "profilePic": document.getElementById("formUsername").value
-          //TO DO : send png file to server
-        })
-    };
-
-    fetch("http://localhost:9090/register-employer", requestOptions)
-      .then(async response => {
-        const isJson = response.headers.get('content-type')?.includes('application/json');
-
-        if(response.status === 201){
-          alert("Employer created")
-        }
-    })
-  }
-}
 
 function ModalRegisterEmployer(props) {
+
+  async function registerEmployer(){
+    let found = false
+  
+    let p1 = document.getElementById('formBasicPassword');
+    let p2 = document.getElementById('formPasswordConfirmation');
+    if (p1.value!==p2.value){
+        p2.setCustomValidity('Passwords dont match');
+    }else{
+      p2.setCustomValidity('');
+  
+      console.log(document.getElementById("formFirstName").value)
+  
+      var myHeaders = new Headers()
+      myHeaders.append("Accept", "*/*")
+      myHeaders.append("Content-type", "application/json")
+  
+      var requestOptions = {
+          method: 'POST',
+          mode : 'cors',
+          headers: myHeaders,
+          body: JSON.stringify({
+            "username": document.getElementById("formUsername").value,
+            //TO DO : first and last names are send as null
+            "firstname": document.getElementById("formFirstName").value,
+            "lastname": document.getElementById("formLastname").value,
+            "password": document.getElementById("formBasicPassword").value,
+            "profilePic": document.getElementById("formUsername").value
+            //TO DO : send png file to server
+          })
+      };
+  
+      fetch("http://localhost:9090/register-employer", requestOptions)
+        .then(async response => {
+          const isJson = response.headers.get('content-type')?.includes('application/json');
+  
+          if(response.status === 201){
+            alert("Employer created")
+          }
+      })
+    }
+  }
 
   const register = () => registerEmployer();
 

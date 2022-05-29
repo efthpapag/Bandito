@@ -42,11 +42,11 @@ public class UserController {
         }
         else if(user instanceof Musician){
             System.out.println("Musician");
-            return new ResponseEntity<>(null, HttpStatus.CREATED);
+            return new ResponseEntity<>(null, HttpStatus.OK);
         }
         else{
             System.out.println("Not found");
-            return new ResponseEntity<>(null, HttpStatus.OK);
+            return new ResponseEntity<>(null, HttpStatus.CREATED);
         }
     }
 
