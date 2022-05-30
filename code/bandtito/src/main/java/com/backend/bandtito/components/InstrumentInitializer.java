@@ -11,17 +11,17 @@ public class  InstrumentInitializer {
     
     public void init(){
 
-        instrumentManagement.createInstument("Piano", "PianoPic");
-        instrumentManagement.createInstument("Guitar", "GuitarPic");
-        instrumentManagement.createInstument("Violin", "ViolinPic");
-        instrumentManagement.createInstument("Drums", "DrumsPic");
-        instrumentManagement.createInstument("Saxophone", "SaxophonePic");
-        instrumentManagement.createInstument("Flute", "FlutePic");
-        instrumentManagement.createInstument("Clarinet", "ClarinetPic");
-        instrumentManagement.createInstument("Cello", "CelloPic");
-        instrumentManagement.createInstument("Trumpet", "TrumpetPic");
-        instrumentManagement.createInstument("Voice", "VoicePic");
-        instrumentManagement.createInstument("Bass", "BassPic");
+        instrumentManagement.createInstument("Piano", "PianoPic.jpg");
+        instrumentManagement.createInstument("Guitar", "GuitarPic.jpg");
+        instrumentManagement.createInstument("Violin", "ViolinPic.jpg");
+        instrumentManagement.createInstument("Drums", "DrumsPic.jpg");
+        instrumentManagement.createInstument("Saxophone", "SaxophonePic.jpg");
+        instrumentManagement.createInstument("Flute", "FlutePic.jpg");
+        instrumentManagement.createInstument("Clarinet", "ClarinetPic.jpg");
+        instrumentManagement.createInstument("Cello", "CelloPic.jpg");
+        instrumentManagement.createInstument("Trumpet", "TrumpetPic.jpg");
+        instrumentManagement.createInstument("Voice", "VoicePic.jpg");
+        instrumentManagement.createInstument("Bass", "BassPic.jpg");
 
         System.out.println("instrument");
 

@@ -383,7 +383,7 @@ const Home = () => {
 
   const navigate = useNavigate();
   const aboutUs = useCallback(() => navigate('/aboutUs', {replace: true}), [navigate]);
-  const help = useCallback(() => navigate('/help', {replace: true}), [navigate]);
+  const help = useCallback(() => navigate('/helphi', {replace: true}), [navigate]);
 
 
   return (
