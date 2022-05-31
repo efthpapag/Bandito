@@ -11,10 +11,6 @@ import Select from 'react-select';
 import {useCallback} from 'react';
 import {useNavigate} from 'react-router-dom';
 
-const GoToMain = () => {
-  useNavigate('/musicianMain');
-}
-
 function ModalLogIn(props) {
 
   let code = 0
@@ -22,12 +18,30 @@ function ModalLogIn(props) {
   const login = () => checkLogIn();
 
   const navigate = useNavigate();
-  const aboutUs = useCallback(() => navigate('/aboutUs', {replace: true}), [navigate]);
+  const musicianMain = useCallback(() => navigate('/musicianMain' + document.getElementById("formUsername").value, {replace: true}), [navigate]);
+
+  /*async function getInfo(){
+
+
+    var headers = new Headers()
+    headers.append("Accept", "application/json")
+
+    var options = {
+        method: 'GET',
+        headers: headers
+    }
+
+    fetch("http://localhost:9090/get-musician-info/" + "musician a", options)
+      .then(response => response.text())
+      .then(result => {
+      }
+    )
+  }*/
 
 
   async function checkLogIn(){
 
-    aboutUs()
+    musicianMain()
   
     var myHeaders = new Headers()
       myHeaders.append("Accept", "*/*")
@@ -240,7 +254,6 @@ function ModalRegisterMusitican(props) {
             <Form.Control type="text" className="bg-primary text-light" required/>
           </Form.Group>
 
-
           <Form.Group className="mb-3" controlId="formGenres">
             <Form.Label className="text-light">Music Genres</Form.Label>
               <Select
@@ -253,7 +266,6 @@ function ModalRegisterMusitican(props) {
               />
           </Form.Group>
 
-
           <Form.Group className="mb-3" controlId="formInstruments">
             <Form.Label className="text-light">Instruments</Form.Label>
               <Select
@@ -265,9 +277,6 @@ function ModalRegisterMusitican(props) {
                 options={optionsInstruments}
               />
           </Form.Group>
-
-
-          
 
           <Button variant="secondary" type="submit" onClick={register}>
             Next
@@ -383,7 +392,7 @@ const Home = () => {
 
   const navigate = useNavigate();
   const aboutUs = useCallback(() => navigate('/aboutUs', {replace: true}), [navigate]);
-  const help = useCallback(() => navigate('/helphi', {replace: true}), [navigate]);
+  const help = useCallback(() => navigate('/help', {replace: true}), [navigate]);
 
 
   return (

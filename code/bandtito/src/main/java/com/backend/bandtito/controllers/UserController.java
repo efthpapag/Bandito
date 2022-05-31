@@ -1,9 +1,13 @@
 package com.backend.bandtito.controllers;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.backend.bandtito.components.UserManagement;
 import com.backend.bandtito.models.Employer;
 import com.backend.bandtito.models.Musician;
 import com.backend.bandtito.models.User;
+import com.backend.bandtito.repositories.UserRepository;
 import com.backend.bandtito.utils.EmployerRequestBody;
 import com.backend.bandtito.utils.LogInRequestBody;
 import com.backend.bandtito.utils.MusicGenreRequestBody;
@@ -14,6 +18,8 @@ import com.backend.bandtito.utils.YearsOfExperienceRequestBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +31,41 @@ public class UserController {
     @Autowired
     private UserManagement userManagement;
 
+    @Autowired
+    private UserRepository UserRepo;
+
+    @GetMapping(path = "/get-musician-info/{username}")
+    public Map<String, String> sendMusicianInfo(@PathVariable String username) {
+
+        System.out.println("get-musician-info");
+        System.out.println(username);
+
+        Musician musician = (Musician) UserRepo.findByUsername(username);
+        HashMap<String, String> map = new HashMap<>();
+        map.put("firstname", musician.getFirstName());
+        map.put("lastname", musician.getLastName());
+        map.put("address", musician.getAddress());
+        map.put("picture", musician.getProfilePic());
+        map.put("age", Integer.toString(musician.getAge()));
+        map.put("isbandmember", String.valueOf(musician.getIsBandMember()));
+        map.put("yearsinband", Integer.toString(musician.getYearsInBand().getDays()));
+    
+        return map;
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     @PostMapping(path = "/log-in")
-    public ResponseEntity<?> lo9gInUser(@RequestBody LogInRequestBody data) {
+    public ResponseEntity<?> logInUser(@RequestBody LogInRequestBody data) {
 
         User user = userManagement.logInUser(data.getUsername(), data.getPassword());
 
