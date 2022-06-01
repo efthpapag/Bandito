@@ -147,7 +147,7 @@ public class BandtitoApplication {
         //UserRepo.save(musician);
 
         userManagement.createMusician("musician a", "firstname a", "lastname a", "a", "address a", 20, 
-        Arrays.asList("Saxophone"), Arrays.asList(2), Arrays.asList("Rock", "musicGenre b"), "a");
+        Arrays.asList("Saxophone"), Arrays.asList(2), Arrays.asList("Rock", "musicGenre b"), "profile.jpg");
         userManagement.createMusician("musician b", "firstname b", "lastname b", "password b", "address b", 30, 
         Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"), "b");
         userManagement.createMusician("musician c", "firstname c", "lastname c", "password c", "address c", 40, 

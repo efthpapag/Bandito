@@ -188,12 +188,12 @@ function ModalRegisterMusitican(props) {
           })
       };
   
-      fetch("http://localhost:9090/register-employer", requestOptions)
+      fetch("http://localhost:9090/register-musician", requestOptions)
         .then(async response => {
           const isJson = response.headers.get('content-type')?.includes('application/json');
   
           if(response.status === 201){
-            alert("Employer created")
+            alert("Musician created")
           }
       })
     }

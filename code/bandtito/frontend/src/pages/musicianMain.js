@@ -33,28 +33,23 @@ const optionsGenres  = [
   { value: "Disco", label: "Disco" }
 ];
 
-const optionsInstruments  = [
-  { value: "Piano", label: "Piano" },
-  { value: "Guitar", label: "Guitar" },
-  { value: "Violin", label: "Violin" },
-  { value: "Drums", label: "Drums" },
-  { value: "Saxophone", label: "Saxophone" },
-  { value: "Flute", label: "Flute" },
-  { value: "Clarinet", label: "Clarinet" },
-  { value: "Cello", label: "Cello" },
-  { value: "Trumpet", label: "Trumpet" },
-  { value: "Voice", label: "Voice" },
-  { value: "Bass", label: "Bass" }
-];
-
 function ModalAddInstrument(props) {
 
   let { username } = useParams();
 
   const addInstrument = () => addNewInstrument();
 
+  const navigate = useNavigate();
+  const musicianMain = useCallback(() => navigate('/musicianMain' + username, {replace: true}), [navigate]);
 
   async function addNewInstrument(){
+
+    let a = document.getElementById("formYears").value
+    let b = username
+    let c = document.getElementById("formInstruments").value
+    console.log(a)
+    console.log(b)
+    console.log(c)
   
     var myHeaders = new Headers()
       myHeaders.append("Accept", "*/*")
@@ -74,11 +69,9 @@ function ModalAddInstrument(props) {
     fetch("http://localhost:9090/add-instrument", requestOptions)
       .then(async response => {
         const isJson = response.headers.get('content-type')?.includes('application/json');
+        musicianMain()
     })
   }
-
-
-  const [selectedOptionInstruments, setSelectedOptionInstruments] = useState(null);
 
   return (
     <Modal
@@ -102,13 +95,20 @@ function ModalAddInstrument(props) {
 
           <Form.Group className="mb-3" controlId="formInstruments">
             <Form.Label className="text-light">Instruments</Form.Label>
-              <Select
-                defaultValue={selectedOptionInstruments}
-                closeMenuOnSelect={false}
-                hideSelectedOptions={false}
-                onChange={setSelectedOptionInstruments}
-                options={optionsInstruments}
-              />
+            <Form.Select aria-label="Default select example">
+              <option>Choose Instrument</option>
+              <option value="Piano">Piano</option>
+              <option value="Guitar">Guitar</option>
+              <option value="Violin">Violin</option>
+              <option value="Drums">Drums</option>
+              <option value="Saxophone">Saxophone</option>
+              <option value="Flute">Flute</option>
+              <option value="Clarinet">Clarinet</option>
+              <option value="Cello">Cello</option>
+              <option value="Trumpet">Trumpet</option>
+              <option value="Voice">Voice</option>
+              <option value="Bass">Bass</option>
+            </Form.Select>
           </Form.Group>
 
           <Button variant="secondary" type="submit" onClick={addInstrument}>
@@ -187,11 +187,19 @@ function ModalAddGenre(props) {
   );
 }
 
+
+var firstname
+var lastname
+var address
+var picture
+var age
+
 const MusicianMain = () => {
 
   const navigate = useNavigate();
   const aboutUs = useCallback(() => navigate('/aboutUs', {replace: true}), [navigate]);
   const help = useCallback(() => navigate('/help', {replace: true}), [navigate]);
+  const logout = useCallback(() => navigate('/', {replace: true}), [navigate]);
 
 
   let { username } = useParams();
@@ -220,8 +228,12 @@ const MusicianMain = () => {
 
     let data = json
     
-    let firstname = data[0]
-  
+    firstname = data["firstname"]
+    lastname = data["lastname"]
+    address = data["address"]
+    picture = data["picture"]
+    age = data["age"]
+    MusicianMain()
   }
 
   getInfo()
@@ -238,8 +250,8 @@ const MusicianMain = () => {
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">
               <Nav.Link className="text-info" onClick={aboutUs} style={{ marginLeft: 0, marginRight: 0, textDecorationLine: 'underline' }}><h1>ABOUT US</h1></Nav.Link>
-              <Nav.Link className="text-info" href="/help" style={{ marginLeft: 0, marginRight: 0, textDecorationLine: 'underline' }}><h1>HELP</h1></Nav.Link>
-              <Nav.Link className="text-info" href="/" style={{ marginLeft: 0, marginRight: 0, textDecorationLine: 'underline' }}><h1>LOGOUT</h1></Nav.Link>
+              <Nav.Link className="text-info" onClick={help} style={{ marginLeft: 0, marginRight: 0, textDecorationLine: 'underline' }}><h1>HELP</h1></Nav.Link>
+              <Nav.Link className="text-info" onClick={logout} style={{ marginLeft: 0, marginRight: 0, textDecorationLine: 'underline' }}><h1>LOGOUT</h1></Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
@@ -266,14 +278,14 @@ const MusicianMain = () => {
           <Col className="border border-info" xs={6} style={{ marginLeft: 0, marginRight: 0}}>
             <Row className="border-bottom border-info" style={{ marginLeft: 0, marginRight: 0 }}>
               <Col style={{ marginLeft: 0, marginRight: 0}}>
-                <Image className='fluid' width="200" height="200" src="images/profile.jpg" alt="logo" style={{ marginTop: "1rem", marginBottom: "1rem"}}></Image>
+                <Image className='fluid' width="200" height="200" src={"images/profile.jpg"} alt="logo" style={{ marginTop: "1rem", marginBottom: "1rem"}}></Image>
               </Col>
               <Col xs={9} style={{ marginLeft: 0, marginRight: 0}}>
                 <h1 className="text-light" style={{ marginTop: "1rem", marginBottom: "1rem"}}>{ username }</h1>
-                <h3 className="text-light">first name</h3>
-                <h3 className="text-light">last name</h3> 
-                <h3 className="text-light">address</h3>
-                <h3 className="text-light">age</h3>
+                <h3 className="text-light">{firstname}</h3>
+                <h3 className="text-light">{lastname}</h3> 
+                <h3 className="text-light">{address}</h3>
+                <h3 className="text-light">{age}</h3>
               </Col>      
             </Row>
             <Row style={{ marginLeft: 0, marginRight: 0 }}>
