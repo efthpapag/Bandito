@@ -18,7 +18,7 @@ function App() {
             <Route path='/aboutUs' element={<AboutUs/>} />
             <Route path='/musicianMain:username' element={<MusicianMain/>} />
             <Route path='/employerMain' element={<EmployerMain/>} />
-            <Route path='/bandMain' element={<BandMain/>} />
+            <Route path='/bandMain:bandinfo' element={<BandMain/>} />
         </Routes>
       </Router>
   );

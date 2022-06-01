@@ -49,11 +49,14 @@ public class UserController {
         map.put("age", Integer.toString(musician.getAge()));
         map.put("isbandmember", String.valueOf(musician.getIsBandMember()));
         map.put("yearsinband", Integer.toString(musician.getYearsInBand().getDays()));
+        map.put("band", musician.getBandPosition().getBand().getName());
+        if(musician.getAdminOfBand() == null){
+            map.put("admin", "false");    
+        }
+        map.put("admin", "true");
     
         return map;
     }
-
-
 
 
 

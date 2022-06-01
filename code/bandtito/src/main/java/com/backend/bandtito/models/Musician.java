@@ -94,6 +94,10 @@ public class Musician extends User{
     public Set<YearsOfExperience> getYearsOfExperience(){
         return this.yearsOfExperience;
     }
+
+    public BandPosition getBandPosition(){
+        return this.bandPosition;
+    }
     
     //Setters
 
