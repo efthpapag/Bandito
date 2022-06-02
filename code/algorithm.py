@@ -3,7 +3,7 @@ import math
 import os
 dir=os.path.dirname(os.path.realpath(__file__))
 
-def findSimilar(vector):
+def findSimilar():
     allUsers=[]
     allVectors=[]
     vector=[]
@@ -36,7 +36,7 @@ def findSimilar(vector):
     print("---------------------------")
     return  list(sortedSimilarities.keys())
 
-names=findSimilar([25,1500,0,10])
+names=findSimilar()
 print(names)
 with open(dir+'//sorted.txt', 'w',encoding='utf-8') as f:
     for i in names:

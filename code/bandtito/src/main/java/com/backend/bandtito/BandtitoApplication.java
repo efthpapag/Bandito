@@ -101,10 +101,10 @@ public class BandtitoApplication {
         System.out.println("--------------------------------------------");
         musicGenresInitializer.init();
         System.out.println("--------------------------------------------");
-        //musiciansInitializer.init();
-        //System.out.println("--------------------------------------------");
-        //bandInitializer.init();
-        //System.out.println("--------------------------------------------");
+        musiciansInitializer.init();
+        System.out.println("--------------------------------------------");
+        bandInitializer.init();
+        System.out.println("--------------------------------------------");
         
 
         //test
@@ -311,7 +311,11 @@ public class BandtitoApplication {
         System.out.println(((Musician) UserRepo.findByUsername("musician a")).getYearsInBand().toString());*/
 
         List<String> listOfGenres = Arrays.asList("Rock");
-        searchMusicianManagement.searchForMusician("a", listOfGenres, "Saxophone", 60, 4000, 400, 400, -1, -1, -1, -1);
-
+        ArrayList<String> namesSorted=searchMusicianManagement.searchForMusician("musician a","a", listOfGenres, "Saxophone", 60, 4000, 400, 400, -1, -1, -1, -1);
+        if(!namesSorted.isEmpty()){
+            System.out.println("Hello "+namesSorted.get(0));
+        }else{
+            System.out.println("No match");
+        }
     }
 }
