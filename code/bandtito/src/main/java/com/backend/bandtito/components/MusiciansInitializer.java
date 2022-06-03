@@ -76,7 +76,7 @@ public class MusiciansInitializer {
         }
 
 
-        for(int j = 0; j < 100; j++){
+        for(int j = 0; j < 50; j++){
 
             int rnd = new Random().nextInt(firstNames.size());
             String firstname = firstNames.get(rnd);

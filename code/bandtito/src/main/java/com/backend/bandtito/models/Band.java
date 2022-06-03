@@ -85,6 +85,10 @@ public class Band {
         return this.address;
     }
 
+    public int getNumberOfPositions(){
+        return this.numberOfPositions;
+    }
+
     public boolean getForHire(){
         return this.forHire;
     }

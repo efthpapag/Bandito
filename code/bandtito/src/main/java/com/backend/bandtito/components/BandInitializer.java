@@ -10,6 +10,7 @@ import java.util.Random;
 
 import com.backend.bandtito.models.Band;
 import com.backend.bandtito.models.BandPosition;
+import com.backend.bandtito.models.Employer;
 import com.backend.bandtito.models.Instrument;
 import com.backend.bandtito.models.MusicGenre;
 import com.backend.bandtito.models.Musician;
@@ -104,7 +105,7 @@ public class BandInitializer {
                     mp = UserRepo.findAll();
                     ArrayList<Musician> musiciansp = new ArrayList<Musician>();
                     for (int k = 0; k < mp.size(); k++) {
-                        if(mp.get(k) instanceof Musician){
+                        if(mp.get(k) instanceof Musician){//TO create proper instsnce of finder
                             musiciansp.add((Musician) mp.get(i));
                             //System.out.println(k);
                         }
@@ -123,7 +124,28 @@ public class BandInitializer {
                 }
                 //System.out.print("band position ");
                 //System.out.println(i);
+
             }
+
+            /*ArrayList<User> listOfEmployers = new ArrayList<>();
+            List<User> list = UserRepo.findAll();
+            for(int i = 0; i < list.size(); i++){
+                listOfEmployers.add((User) list.get(i));
+                System.out.println("user added");
+            }
+
+            for (int i = 0; i < listOfEmployers.size(); i++) {
+                User user = listOfEmployers.get(i);
+                System.out.println("band rated 1");
+                if(user instanceof Employer){
+                    r = new Random();
+                    low = 1;
+                    high = 5;
+                    inNum = r.nextInt(high-low) + low;
+                    bandManagement.rateBand(user.getUsername(), band.getName(), inNum);
+                    System.out.println("band rated 2");
+                }
+            }*/
 
             System.out.print("band");
             System.out.println(j);

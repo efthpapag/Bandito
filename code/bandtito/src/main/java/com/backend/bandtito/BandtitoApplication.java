@@ -97,6 +97,12 @@ public class BandtitoApplication {
 	@PostConstruct
     public void init() throws InterruptedException, IOException{
 
+        userManagement.createEmployer("employer c", "a", "a", "a", "a");
+        userManagement.createEmployer("employer d", "a", "a", "a", "a");
+        userManagement.createEmployer("employer f", "a", "a", "a", "a");
+        userManagement.createEmployer("employer g", "a", "a", "a", "a");
+
+
         instrumentInitializer.init();
         System.out.println("--------------------------------------------");
         musicGenresInitializer.init();
