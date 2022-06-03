@@ -189,9 +189,9 @@ function ModalAddGenre(props) {
 }
 
 
-
 var address
 var picture
+
 
 
 const BandMain = () => {
@@ -209,9 +209,6 @@ const BandMain = () => {
   let admin = paramlist[2];
 
   
-  
-  
-
   async function getInfo(){
 
 
