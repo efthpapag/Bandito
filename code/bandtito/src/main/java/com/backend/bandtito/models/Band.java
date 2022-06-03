@@ -81,12 +81,16 @@ public class Band {
         return this.name;
     }
 
+    public String getAddress(){
+        return this.address;
+    }
+
     public boolean getForHire(){
         return this.forHire;
     }
 
-    public String getAddress(){
-        return this.address;
+    public boolean getIsFull(){
+        return this.isFull;
     }
 
     public Musician getAdmin(){

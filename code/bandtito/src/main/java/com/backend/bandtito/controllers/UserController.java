@@ -1,12 +1,14 @@
 package com.backend.bandtito.controllers;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import com.backend.bandtito.components.UserManagement;
 import com.backend.bandtito.models.Employer;
 import com.backend.bandtito.models.Musician;
 import com.backend.bandtito.models.User;
+import com.backend.bandtito.models.YearsOfExperience;
 import com.backend.bandtito.repositories.UserRepository;
 import com.backend.bandtito.utils.EmployerRequestBody;
 import com.backend.bandtito.utils.LogInRequestBody;
@@ -54,6 +56,22 @@ public class UserController {
             map.put("admin", "false");    
         }
         map.put("admin", "true");
+
+        int i = 0;
+        //System.out.print(musician.getYearsOfExperience().size());
+        Iterator<YearsOfExperience> it = musician.getYearsOfExperience().iterator();
+        while(it.hasNext()){
+            YearsOfExperience yearsOfExperience = it.next();
+            String s = yearsOfExperience.getInstument().getName();
+            String y = Integer.toString(yearsOfExperience.getNumberOfYears());
+            String uuid = yearsOfExperience.getUuid();
+            map.put("inst" + i, s);
+            map.put("years" + i, y);
+            map.put("uuid" + i, uuid);
+            System.out.println(s);
+            System.out.println(i);
+            i++;
+        }
     
         return map;
     }

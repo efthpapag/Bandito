@@ -10,29 +10,32 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.concurrent.TimeUnit;
 
+import com.backend.bandtito.models.Band;
 import com.backend.bandtito.models.MusicGenre;
 import com.backend.bandtito.models.Musician;
 import com.backend.bandtito.models.User;
 import com.backend.bandtito.models.YearsOfExperience;
+import com.backend.bandtito.repositories.BandRepository;
 import com.backend.bandtito.repositories.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class SearchMusicianManagement {
+public class SearchBandAsEmployerManagement {
 
     @Autowired
-    private UserRepository UserRepo;
+    private BandRepository BandRepo;
     
-    public /*Musician*/ ArrayList<String> searchForMusician(String adminName,String addressOfBand, List<String> musicGenres, String instrument, int maxAge, int maxDistanceInMeters, int maxYDaysInBand, int maxYearsOfExperience, 
-    int minAge, int minDistanceInMeters, int minDaysInBandInDays, int minYearsOfExperience) throws IOException, InterruptedException{
+    public /*Band*/ ArrayList<String> searchForMusician(String address, List<String> musicGenres, int maxDistanceInMeters,
+    int minDistanceInMeters, int maxRating, int minRating, int numberOfMembers) throws IOException, InterruptedException{
 
-        ArrayList<User> listOfMusicians = new ArrayList<>();
-        List<User> list = UserRepo.findAll();
+        ArrayList<Band> listOfBands = new ArrayList<>();
+        List<Band> list = BandRepo.findAll();
         for(int i = 0; i < list.size(); i++){
-            listOfMusicians.add((User) list.get(i));
+            listOfBands.add((Band) list.get(i));
         }
 
         BufferedWriter bw = null;
@@ -45,6 +48,8 @@ public class SearchMusicianManagement {
         FileWriter fw = new FileWriter(file);
         bw = new BufferedWriter(fw);
         System.out.println("File written Successfully");
+        
+        //Creates original preferences
         Musician admin = (Musician) UserRepo.findByUsername(adminName);
         int yearsAdmin=0;
         int n=0;
@@ -57,11 +62,16 @@ public class SearchMusicianManagement {
         bw.write(admin.getUsername() + "++" + admin.getAge() + "++" + 0  + "++" + admin.getYearsInBand().getDays() + "++" + yearsAdmin/n);  
         bw.newLine();
 
-        for (int i = 0; i < listOfMusicians.size(); i++) {
+
+
+        for (int i = 0; i < listOfBands.size(); i++) {
             int years = 0;
-            User user = listOfMusicians.get(i);
-            if(user instanceof Musician){
-                Musician musician = (Musician) user;
+            Band band = listOfBands.get(i);
+            if(band.getForHire() && band.getIsFull()){
+
+                int temp = 0;
+                int numOfRatings = 0; 
+
                 if(!musician.getIsBandMember() && maxAge >= musician.getAge() && musician.getAge() >= minAge && maxYDaysInBand >= musician.getYearsInBand().getDays() && musician.getYearsInBand().getDays() >= minDaysInBandInDays){    
                     boolean playsInstrument = false;
                     ArrayList<YearsOfExperience> yearsOfExperience = new ArrayList<>();
@@ -102,6 +112,7 @@ public class SearchMusicianManagement {
                     }
                 }
             }
+
         }
      
         bw.close();
