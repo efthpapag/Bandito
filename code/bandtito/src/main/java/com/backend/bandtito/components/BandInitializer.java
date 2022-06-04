@@ -25,6 +25,9 @@ import org.springframework.stereotype.Component;
 public class BandInitializer {
 
     @Autowired
+    private UserManagement userManagement;
+
+    @Autowired
     private BandManagement bandManagement;
 
     @Autowired
@@ -33,7 +36,7 @@ public class BandInitializer {
     @Autowired
     private InstrumentRepository InstrumentRepo;
 
-    public void init(){
+    public void init() throws ClassNotFoundException{
 
         List<Instrument> Inst = new ArrayList<>();
         Inst = InstrumentRepo.findAll();
@@ -105,7 +108,10 @@ public class BandInitializer {
                     mp = UserRepo.findAll();
                     ArrayList<Musician> musiciansp = new ArrayList<Musician>();
                     for (int k = 0; k < mp.size(); k++) {
-                        if(mp.get(k) instanceof Musician){//TO create proper instsnce of finder
+                        //System.out.println("--------------------------------------------");
+                        //System.out.println(mp.get(k).getUsername());
+                        //System.out.println(mp.get(k).getClass().getName());
+                        if(!mp.get(k).getClass().getName().equals("com.backend.bandtito.models.Employer")){//TO create proper instsnce of finder
                             musiciansp.add((Musician) mp.get(i));
                             //System.out.println(k);
                         }
@@ -114,7 +120,7 @@ public class BandInitializer {
                     int ran = new Random().nextInt(musiciansp.size());
                     //System.out.print(musiciansp.get(ran).getIsBandMember());
                     while(musiciansp.get(ran).getIsBandMember()){ 
-                        System.out.println("-------------------- is member");
+                        //System.out.println("-------------------- is member");
                         //System.out.println(ran);
                         ran = new Random().nextInt(musiciansp.size());
                     }
@@ -127,25 +133,33 @@ public class BandInitializer {
 
             }
 
-            /*ArrayList<User> listOfEmployers = new ArrayList<>();
-            List<User> list = UserRepo.findAll();
+            ArrayList<User> listOfEmployers = new ArrayList<>();
+            /*List<User> list = UserRepo.findAll();
             for(int i = 0; i < list.size(); i++){
                 listOfEmployers.add((User) list.get(i));
                 System.out.println("user added");
-            }
+            }*/
+            Employer e = userManagement.createEmployer("JoeSmith", "Joe", "Smith", "1234", "a");
+            e = userManagement.createEmployer("MariaSmith", "Maria", "Smith", "1234", "a");
+            listOfEmployers.add(e);
+            e = userManagement.createEmployer("JohnHammond", "John", "Hammond", "1234", "a");
+            listOfEmployers.add(e);
+            e = userManagement.createEmployer("BillFox", "Bill", "Fox", "1234", "a");
+            listOfEmployers.add(e);
+
 
             for (int i = 0; i < listOfEmployers.size(); i++) {
                 User user = listOfEmployers.get(i);
-                System.out.println("band rated 1");
+                //System.out.println("band rated 1");
                 if(user instanceof Employer){
                     r = new Random();
                     low = 1;
                     high = 5;
                     inNum = r.nextInt(high-low) + low;
                     bandManagement.rateBand(user.getUsername(), band.getName(), inNum);
-                    System.out.println("band rated 2");
+                    //System.out.println("band rated 2");
                 }
-            }*/
+            }
 
             System.out.print("band");
             System.out.println(j);

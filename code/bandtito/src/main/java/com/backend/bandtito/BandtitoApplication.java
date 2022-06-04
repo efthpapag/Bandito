@@ -22,6 +22,7 @@ import com.backend.bandtito.components.JobManagement;
 import com.backend.bandtito.components.MusicGenreManagement;
 import com.backend.bandtito.components.MusicGenresInitializer;
 import com.backend.bandtito.components.MusiciansInitializer;
+import com.backend.bandtito.components.SearchBandAsEmployerManagement;
 import com.backend.bandtito.components.SearchMusicianManagement;
 import com.backend.bandtito.components.UserManagement;
 import com.backend.bandtito.models.Band;
@@ -89,18 +90,20 @@ public class BandtitoApplication {
     private BandInitializer bandInitializer;
     @Autowired
     private SearchMusicianManagement searchMusicianManagement;
+    @Autowired
+    private SearchBandAsEmployerManagement searchBandAsEmployerManagement;
 
 	public static void main(String[] args) {
 		SpringApplication.run(BandtitoApplication.class, args);
 	}
 
 	@PostConstruct
-    public void init() throws InterruptedException, IOException{
+    public void init() throws InterruptedException, IOException, ClassNotFoundException{
 
-        userManagement.createEmployer("employer c", "a", "a", "a", "a");
-        userManagement.createEmployer("employer d", "a", "a", "a", "a");
-        userManagement.createEmployer("employer f", "a", "a", "a", "a");
-        userManagement.createEmployer("employer g", "a", "a", "a", "a");
+        //userManagement.createEmployer("employer c", "a", "a", "a", "a");
+        //userManagement.createEmployer("employer d", "a", "a", "a", "a");
+        //userManagement.createEmployer("employer f", "a", "a", "a", "a");
+        //userManagement.createEmployer("employer g", "a", "a", "a", "a");
 
 
         instrumentInitializer.init();
@@ -317,9 +320,16 @@ public class BandtitoApplication {
         System.out.println(((Musician) UserRepo.findByUsername("musician a")).getYearsInBand().toString());*/
 
         List<String> listOfGenres = Arrays.asList("Rock");
-        ArrayList<String> namesSorted=searchMusicianManagement.searchForMusician("musician a","a", listOfGenres, "Saxophone", 60, 4000, 400, 400, -1, -1, -1, -1);
-        if(!namesSorted.isEmpty()){
-            System.out.println("Hello "+namesSorted.get(0));
+        ArrayList<String> musiciansSorted = searchMusicianManagement.searchForMusician("musician a","a", listOfGenres, "Saxophone", 60, 4000, 400, 400, -1, -1, -1, -1);
+        if(!musiciansSorted.isEmpty()){
+            System.out.println("Hello " + musiciansSorted.get(0));
+        }else{
+            System.out.println("No match");
+        }
+
+        ArrayList<String> bandsSorted = searchBandAsEmployerManagement.searchForMusician("employer a", "a", listOfGenres, 100000, -1, 5, 0, 30, -1);
+        if(!bandsSorted.isEmpty()){
+            System.out.println("Hello " + bandsSorted.get(0));
         }else{
             System.out.println("No match");
         }
