@@ -69,7 +69,7 @@ public class BandInitializer {
             }
         }
 
-        for(int j = 0; j < 10; j++){
+        for(int j = 0; j < 200; j++){
 
             String name = bandnames.get(j);
             
@@ -102,7 +102,7 @@ public class BandInitializer {
             for(int i = 0; i < inNum; i++){
                 rnd = new Random().nextInt(Instuments.size());
                 BandPosition bandPosition = bandManagement.createBandPosition(Instuments.get(rnd).getName(), band.getName());
-                if (/*rand.nextInt(2) == 0*/true) {
+                if (new Random().nextInt(2) == 0/*true*/) {
 
                     List<User> mp = new ArrayList<>();
                     mp = UserRepo.findAll();

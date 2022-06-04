@@ -60,7 +60,7 @@ public class SearchBandPositionAsMusicianManagement {
             YearsOfExperience yearsOfExperience = it.next();
             yearsOfExperienceOfmusician =+ yearsOfExperience.getNumberOfYears();
         }
-        bw.write(musician.getUsername() + "++" + musician.getAge() + "++" + 5 + "++" + 0  + "++" +  (maxNumberOfMembers + minNumberOfMembers)/2 + "++" + yearsOfExperienceOfmusician/musician.getYearsOfExperience().size());  
+        bw.write(musician.getUsername() + "++" + musician.getAge() + "++" + 5 + "++" + 0  + "++" +  (maxNumberOfMembers + minNumberOfMembers) / 2 + "++" + yearsOfExperienceOfmusician/musician.getYearsOfExperience().size() + (maxNumberOfMembers + minNumberOfMembers) / 2);  
         bw.newLine();
 
         for (int i = 0; i < listOfBands.size(); i++) {
@@ -147,7 +147,7 @@ public class SearchBandPositionAsMusicianManagement {
                                             while(it7.hasNext()){
                                                 YearsOfExperience yearsOfExperience = it7.next();
                                                 if(yearsOfExperience.getInstument().getName().equals(bandPosition.getInstument().getName())){
-                                                    bw.write(band.getName() + "++" + bandPosition.getUuid() + "++" + avgAge + "++" + avgRating + "++" + distanceInMeters  + "++" + band.getNumberOfPositions());
+                                                    bw.write(bandPosition.getUuid() + "++" + avgAge + "++" + avgRating + "++" + distanceInMeters + "++" + avgExperience + "++" + band.getNumberOfPositions());
                                                     bw.newLine();
                                                 }
                                             }
