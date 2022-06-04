@@ -9,16 +9,16 @@ def findSimilar():
     vector=[]
     with open(dir+'//list_of_bandsFH.txt',encoding='utf-8') as f:
             line = f.readline()
-            vector.append(int(line.split("++", 4)[1].strip()))
-            vector.append(int(line.split("++", 4)[2].strip()))
+            vector.append(int(line.split("++", 3)[1].strip()))
+            vector.append(int(line.split("++", 3)[2].strip()))
             vector.append(int(line.split("++", 4)[3].strip()))
             line=f.readline()
             while (len(line.split("++", 1))==2):
-                band=(line.split("++", 4)[0].strip())
+                band=(line.split("++", 3)[0].strip())
                 allBands.append(band)
-                avgRating=int(line.split("++", 4)[1].strip())
-                dist=int(line.split("++", 4)[2].strip())
-                numberOfPositions=int(line.split("++", 4)[3].strip())
+                avgRating=int(line.split("++", 3)[1].strip())
+                dist=int(line.split("++", 3)[2].strip())
+                numberOfPositions=int(line.split("++", 3)[3].strip())
                 allVectors.append([avgRating,dist,numberOfPositions])
                 line=f.readline()
     print(allBands)

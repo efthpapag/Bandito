@@ -42,7 +42,7 @@ public class SearchBandPositionAsMusicianManagement {
         }
 
         BufferedWriter bw = null;
-        File file = new File("../list_of_bandsFH.txt");
+        File file = new File("../list_of_bandPositions.txt");
 
         if (!file.exists()) {
             file.createNewFile();
@@ -60,7 +60,7 @@ public class SearchBandPositionAsMusicianManagement {
             YearsOfExperience yearsOfExperience = it.next();
             yearsOfExperienceOfmusician =+ yearsOfExperience.getNumberOfYears();
         }
-        bw.write(musician.getUsername() + "++" + musician.getAge() + "++" + 5 + "++" + 0  + "++" +  (maxNumberOfMembers + minNumberOfMembers) / 2 + "++" + yearsOfExperienceOfmusician/musician.getYearsOfExperience().size() + (maxNumberOfMembers + minNumberOfMembers) / 2);  
+        bw.write(musician.getUsername() + "++" + musician.getAge() + "++" + 5 + "++" + 0 + "++" + yearsOfExperienceOfmusician/musician.getYearsOfExperience().size() + "++"+ (maxNumberOfMembers + minNumberOfMembers) / 2);  
         bw.newLine();
 
         for (int i = 0; i < listOfBands.size(); i++) {
@@ -163,24 +163,24 @@ public class SearchBandPositionAsMusicianManagement {
         }
      
         bw.close();
-        ProcessBuilder processBuilder = new ProcessBuilder("python", "../algorithmBandsFH.py");
+        ProcessBuilder processBuilder = new ProcessBuilder("python", "../algorithmBandPos.py");
         Process process = processBuilder.start();
-        ArrayList<String> sortedBandsFH = new ArrayList<String>();
+        ArrayList<String> sortedBandPositions = new ArrayList<String>();
         process.waitFor();
         //TimeUnit.SECONDS.sleep(5);
         try {
-            File myObj = new File("../sortedBandsFH.txt");
+            File myObj = new File("../sortedBandPositions.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
               String data = myReader.nextLine();
-              sortedBandsFH.add(data);
+              sortedBandPositions.add(data);
             }
             myReader.close();
           } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
           }
-        return sortedBandsFH;
+        return sortedBandPositions;
     }
 
 }
