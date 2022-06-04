@@ -40,7 +40,7 @@ public class SearchBandAsEmployerManagement {
         }
 
         BufferedWriter bw = null;
-        File file = new File("../list_of_musicians.txt");
+        File file = new File("../list_of_bandsFH.txt");
 
         if (!file.exists()) {
             file.createNewFile();
@@ -102,24 +102,24 @@ public class SearchBandAsEmployerManagement {
         }
      
         bw.close();
-        ProcessBuilder processBuilder = new ProcessBuilder("python", "../algorithm.py");
+        ProcessBuilder processBuilder = new ProcessBuilder("python", "../algorithmBandsFH.py");
         Process process = processBuilder.start();
-        ArrayList<String> sortedUsernames = new ArrayList<String>();
+        ArrayList<String> sortedBandsFH = new ArrayList<String>();
         process.waitFor();
         //TimeUnit.SECONDS.sleep(5);
         try {
-            File myObj = new File("../sorted.txt");
+            File myObj = new File("../sortedBandsFH.txt");
             Scanner myReader = new Scanner(myObj);
             while (myReader.hasNextLine()) {
               String data = myReader.nextLine();
-              sortedUsernames.add(data);
+              sortedBandsFH.add(data);
             }
             myReader.close();
           } catch (FileNotFoundException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
           }
-        return sortedUsernames;
+        return sortedBandsFH;
     }
 
 }

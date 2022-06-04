@@ -62,15 +62,17 @@ public class UserController {
         Iterator<YearsOfExperience> it = musician.getYearsOfExperience().iterator();
         while(it.hasNext()){
             YearsOfExperience yearsOfExperience = it.next();
-            String s = yearsOfExperience.getInstument().getName();
-            String y = Integer.toString(yearsOfExperience.getNumberOfYears());
-            String uuid = yearsOfExperience.getUuid();
-            map.put("inst" + i, s);
-            map.put("years" + i, y);
-            map.put("uuid" + i, uuid);
-            System.out.println(s);
-            System.out.println(i);
-            i++;
+            if(yearsOfExperience.getInstument()!=null){
+                String s = yearsOfExperience.getInstument().getName();
+                String y = Integer.toString(yearsOfExperience.getNumberOfYears());
+                String uuid = yearsOfExperience.getUuid();
+                map.put("inst" + i, s);
+                map.put("years" + i, y);
+                map.put("uuid" + i, uuid);
+                System.out.println(s);
+                System.out.println(i);
+                i++;
+            }
         }
     
         return map;
