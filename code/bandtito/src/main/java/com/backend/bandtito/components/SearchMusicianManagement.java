@@ -26,7 +26,7 @@ public class SearchMusicianManagement {
     @Autowired
     private UserRepository UserRepo;
     
-    public /*Musician*/ ArrayList<String> searchForMusician(String adminName,String addressOfBand, List<String> musicGenres, String instrument, int maxAge, int maxDistanceInMeters, int maxYDaysInBand, int maxYearsOfExperience, 
+    public ArrayList<String> searchForMusician(String adminName,String addressOfBand, List<String> musicGenres, String instrument, int maxAge, int maxDistanceInMeters, int maxYDaysInBand, int maxYearsOfExperience, 
     int minAge, int minDistanceInMeters, int minDaysInBandInDays, int minYearsOfExperience) throws IOException, InterruptedException{
 
         ArrayList<User> listOfMusicians = new ArrayList<>();
@@ -47,14 +47,12 @@ public class SearchMusicianManagement {
         System.out.println("File written Successfully");
         Musician admin = (Musician) UserRepo.findByUsername(adminName);
         int yearsAdmin=0;
-        int n=0;
         Iterator<YearsOfExperience> it = admin.getYearsOfExperience().iterator();
         while(it.hasNext()){
             YearsOfExperience yearsOfExperience = it.next();
             yearsAdmin =+ yearsOfExperience.getNumberOfYears();
-            n++;
         }
-        bw.write(admin.getUsername() + "++" + admin.getAge() + "++" + 0  + "++" + admin.getYearsInBand().getDays() + "++" + yearsAdmin/n);  
+        bw.write(admin.getUsername() + "++" + admin.getAge() + "++" + 0  + "++" + admin.getYearsInBand().getDays() + "++" + yearsAdmin/admin.getYearsOfExperience().size());  
         bw.newLine();
 
         for (int i = 0; i < listOfMusicians.size(); i++) {
