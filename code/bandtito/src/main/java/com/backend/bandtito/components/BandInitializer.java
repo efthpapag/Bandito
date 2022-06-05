@@ -69,6 +69,105 @@ public class BandInitializer {
             }
         }
 
+        //create full bands
+        for(int j = 0; j < 10; j++){
+
+            String name = bandnames.get(j);
+            
+            int rnd = new Random().nextInt(musicians.size());
+            while(musicians.get(rnd).getIsBandMember()){
+                rnd = new Random().nextInt(musicians.size());
+                //System.out.println("-------------------- is member");
+            }
+            Musician musician = musicians.get(rnd);
+            //System.out.println(musician.getUsername());
+
+            ArrayList<String> mg = new ArrayList<>();
+
+            Iterator<MusicGenre> it = musician.getMusicGenres().iterator();
+            while(it.hasNext()){
+                String s = it.next().getName();
+                //System.out.println(s);
+                mg.add(s);
+            }
+
+            String bandPicture = "bandPic.png";
+
+            Band band = bandManagement.createBand(name, "address", musician.getUsername(), mg, true, bandPicture);
+
+            Random r = new Random();
+            int low = 1;
+            int high = 3;
+            int inNum = r.nextInt(high-low) + low;
+
+            for(int i = 0; i < inNum; i++){
+                rnd = new Random().nextInt(Instuments.size());
+                BandPosition bandPosition = bandManagement.createBandPosition(Instuments.get(rnd).getName(), band.getName());
+                if (true) {
+
+                    List<User> mp = new ArrayList<>();
+                    mp = UserRepo.findAll();
+                    ArrayList<Musician> musiciansp = new ArrayList<Musician>();
+                    for (int k = 0; k < mp.size(); k++) {
+                        //System.out.println("--------------------------------------------");
+                        //System.out.println(mp.get(k).getUsername());
+                        //System.out.println(mp.get(k).getClass().getName());
+                        if(!mp.get(k).getClass().getName().equals("com.backend.bandtito.models.Employer")){//TO create proper instsnce of finder
+                            musiciansp.add((Musician) mp.get(i));
+                            //System.out.println(k);
+                        }
+                    }
+
+                    int ran = new Random().nextInt(musiciansp.size());
+                    //System.out.print(musiciansp.get(ran).getIsBandMember());
+                    while(musiciansp.get(ran).getIsBandMember()){ 
+                        //System.out.println("-------------------- is member");
+                        //System.out.println(ran);
+                        ran = new Random().nextInt(musiciansp.size());
+                    }
+                    musician = musiciansp.get(ran);
+                    bandManagement.fillBandPosition(bandPosition.getUuid(), musician.getUsername());
+            
+                }
+                //System.out.print("band position ");
+                //System.out.println(i);
+
+            }
+
+            ArrayList<User> listOfEmployers = new ArrayList<>();
+            /*List<User> list = UserRepo.findAll();
+            for(int i = 0; i < list.size(); i++){
+                listOfEmployers.add((User) list.get(i));
+                System.out.println("user added");
+            }*/
+            Employer e = userManagement.createEmployer("JoeSmith", "Joe", "Smith", "1234", "a");
+            e = userManagement.createEmployer("MariaSmith", "Maria", "Smith", "1234", "a");
+            listOfEmployers.add(e);
+            e = userManagement.createEmployer("JohnHammond", "John", "Hammond", "1234", "a");
+            listOfEmployers.add(e);
+            e = userManagement.createEmployer("BillFox", "Bill", "Fox", "1234", "a");
+            listOfEmployers.add(e);
+
+
+            for (int i = 0; i < listOfEmployers.size(); i++) {
+                User user = listOfEmployers.get(i);
+                //System.out.println("band rated 1");
+                if(user instanceof Employer){
+                    r = new Random();
+                    low = 1;
+                    high = 5;
+                    inNum = r.nextInt(high-low) + low;
+                    bandManagement.rateBand(user.getUsername(), band.getName(), inNum);
+                    //System.out.println("band rated 2");
+                }
+            }
+
+            System.out.print("bands full");
+            System.out.println(j);
+
+        }
+
+        //create empty bands
         for(int j = 0; j < 10; j++){
 
             String name = bandnames.get(j);
@@ -161,9 +260,10 @@ public class BandInitializer {
                 }
             }
 
-            System.out.print("band");
+            System.out.print("bands empty");
             System.out.println(j);
 
         }
+
     }
 }
