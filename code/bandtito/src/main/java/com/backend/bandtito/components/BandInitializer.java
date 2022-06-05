@@ -238,12 +238,12 @@ public class BandInitializer {
                 listOfEmployers.add((User) list.get(i));
                 System.out.println("user added");
             }*/
-            Employer e = userManagement.createEmployer("JoeSmith", "Joe", "Smith", "1234", "a");
-            e = userManagement.createEmployer("MariaSmith", "Maria", "Smith", "1234", "a");
+            Employer e = userManagement.createEmployer("GeorgeAbbott", "George", "Abbott", "1234", "a");
+            e = userManagement.createEmployer("GiovanyGorgio", "Giovany", "Gorgio", "1234", "a");
             listOfEmployers.add(e);
-            e = userManagement.createEmployer("JohnHammond", "John", "Hammond", "1234", "a");
+            e = userManagement.createEmployer("GeorgePapadopoylos", "George", "Papadopoylos", "1234", "a");
             listOfEmployers.add(e);
-            e = userManagement.createEmployer("BillFox", "Bill", "Fox", "1234", "a");
+            e = userManagement.createEmployer("AnneSimpson", "Anne", "Simpson", "1234", "a");
             listOfEmployers.add(e);
 
 
