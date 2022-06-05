@@ -32,7 +32,7 @@ public class SearchBandPositionAsMusicianManagement {
     @Autowired
     private UserRepository UserRepo;
     
-    public ArrayList<String> searchForMusician(String musicianUsername, String address, List<String> musicGenres, int maxDistanceInMeters,
+    public ArrayList<String> searchForBandPosition(String musicianUsername, String address, List<String> musicGenres, int maxDistanceInMeters,
     int minDistanceInMeters, int maxRating, int minRating, int maxNumberOfMembers, int minNumberOfMembers , int minAvgAge, int maxAvgAge, int maxAvgYearsOfExperience, int minAvgYearsOfExperience) throws IOException, InterruptedException{
 
         ArrayList<Band> listOfBands = new ArrayList<>();

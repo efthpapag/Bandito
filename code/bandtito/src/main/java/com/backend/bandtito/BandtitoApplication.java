@@ -13,6 +13,8 @@ import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import javax.annotation.PostConstruct;
+import javax.persistence.PostLoad;
+import javax.persistence.PostUpdate;
 
 import com.backend.bandtito.components.BandInitializer;
 import com.backend.bandtito.components.BandManagement;
@@ -23,6 +25,7 @@ import com.backend.bandtito.components.MusicGenreManagement;
 import com.backend.bandtito.components.MusicGenresInitializer;
 import com.backend.bandtito.components.MusiciansInitializer;
 import com.backend.bandtito.components.SearchBandAsEmployerManagement;
+import com.backend.bandtito.components.SearchBandPositionAsMusicianManagement;
 import com.backend.bandtito.components.SearchMusicianManagement;
 import com.backend.bandtito.components.UserManagement;
 import com.backend.bandtito.models.Band;
@@ -48,6 +51,7 @@ import com.backend.bandtito.repositories.YearsOfExperienceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.bind.annotation.PostMapping;
 
 @SpringBootApplication
 public class BandtitoApplication {
@@ -92,8 +96,10 @@ public class BandtitoApplication {
     private SearchMusicianManagement searchMusicianManagement;
     @Autowired
     private SearchBandAsEmployerManagement searchBandAsEmployerManagement;
+    @Autowired
+    private SearchBandPositionAsMusicianManagement searchBandPositionAsMusicianManagement;
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws ClassNotFoundException, InterruptedException, IOException {
 		SpringApplication.run(BandtitoApplication.class, args);
 	}
 
@@ -106,14 +112,14 @@ public class BandtitoApplication {
         //userManagement.createEmployer("employer g", "a", "a", "a", "a");
 
 
-        instrumentInitializer.init();
-        System.out.println("--------------------------------------------");
-        musicGenresInitializer.init();
-        System.out.println("--------------------------------------------");
-        musiciansInitializer.init();
-        System.out.println("--------------------------------------------");
-        bandInitializer.init();
-        System.out.println("--------------------------------------------");
+        //instrumentInitializer.init();
+        //System.out.println("--------------------------------------------");
+        //musicGenresInitializer.init();
+        //System.out.println("--------------------------------------------");
+        //musiciansInitializer.init();
+        //System.out.println("--------------------------------------------");
+        //bandInitializer.init();
+        //System.out.println("--------------------------------------------");
         
 
         //test
@@ -125,10 +131,10 @@ public class BandtitoApplication {
         //instument = new Instrument("instument b");
         //InstrumentRepo.save(instument);
 
-        instrumentManagement.createInstument("instument a", "a");
-        instrumentManagement.createInstument("instument b", "b");
+        //instrumentManagement.createInstument("instument a", "a");
+        //instrumentManagement.createInstument("instument b", "b");
 
-        System.out.println("create instuments");
+        //System.out.println("create instuments");
 
         //create music genres
         
@@ -139,10 +145,10 @@ public class BandtitoApplication {
         //List<MusicGenre> musicGenresList = Arrays.asList(MusicGenreRepo.findByName("musicGenre a"), MusicGenreRepo.findByName("musicGenre b"));
         //Set<MusicGenre> musicGenresSet = new HashSet<>(musicGenresList);
 
-        musicGenreManagement.createMusicGenre("musicGenre a");
-        musicGenreManagement.createMusicGenre("musicGenre b");
+        //musicGenreManagement.createMusicGenre("musicGenre a");
+        //musicGenreManagement.createMusicGenre("musicGenre b");
 
-        System.out.println("create music genres");
+        //System.out.println("create music genres");
 
         //Create musicians
 		
@@ -158,7 +164,7 @@ public class BandtitoApplication {
         userManagement.createMusician("musician a", "firstname a", "lastname a", "a", "address a", 20, 
         Arrays.asList("Saxophone"), Arrays.asList(2), Arrays.asList("Rock", "musicGenre b"), "profile.jpg");
         userManagement.createMusician("musician b", "firstname b", "lastname b", "password b", "address b", 30, 
-        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"), "b");
+        Arrays.asList("Saxophone"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"), "b");
         userManagement.createMusician("musician c", "firstname c", "lastname c", "password c", "address c", 40, 
         Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"), "a");
         userManagement.createMusician("musician d", "firstname d", "lastname d", "password d", "address d", 50, 
@@ -318,19 +324,30 @@ public class BandtitoApplication {
         bandManagement.emptyPosition(bandUuid);
 
         System.out.println(((Musician) UserRepo.findByUsername("musician a")).getYearsInBand().toString());*/
+        System.out.println("--------------------------------------------");
 
         List<String> listOfGenres = Arrays.asList("Rock");
         ArrayList<String> musiciansSorted = searchMusicianManagement.searchForMusician("musician a","a", listOfGenres, "Saxophone", 60, 4000, 400, 400, -1, -1, -1, -1);
         if(!musiciansSorted.isEmpty()){
             System.out.println("Hello " + musiciansSorted.get(0));
-        }else{
+        }
+        else{
             System.out.println("No match");
         }
-
-        ArrayList<String> bandsSorted = searchBandAsEmployerManagement.searchForMusician("employer a", "a", listOfGenres, 100000, -1, 5, 0, 30, -1);
+        System.out.println("--------------------------------------------");
+        ArrayList<String> bandsSorted = searchBandAsEmployerManagement.searchForBand("employer a", "a", listOfGenres, 100000, -1, 5, 0, 30, -1);
         if(!bandsSorted.isEmpty()){
             System.out.println("Hello " + bandsSorted.get(0));
-        }else{
+        }
+        else{
+            System.out.println("No match");
+        }
+        System.out.println("--------------------------------------------");
+        ArrayList<String> bandPositionsSorted =  searchBandPositionAsMusicianManagement.searchForBandPosition("musician b", "a", listOfGenres, 100000, -1, 5, 0, 30, 0, -1, 70, 80, -1);
+        if(!bandPositionsSorted.isEmpty()){
+            System.out.println("Hello " + bandPositionsSorted.get(0));
+        }
+        else{
             System.out.println("No match");
         }
     }
