@@ -69,7 +69,7 @@ public class BandInitializer {
             }
         }
 
-        for(int j = 0; j < 200; j++){
+        for(int j = 0; j < 10; j++){
 
             String name = bandnames.get(j);
             

@@ -21,16 +21,12 @@ function ModalLogIn(props) {
   const musicianMain = useCallback(() => navigate('/musicianMain' + document.getElementById("formUsername").value, {replace: true}), [navigate]);
 
   /*async function getInfo(){
-
-
     var headers = new Headers()
     headers.append("Accept", "application/json")
-
     var options = {
         method: 'GET',
         headers: headers
     }
-
     fetch("http://localhost:9090/get-musician-info/" + "musician a", options)
       .then(response => response.text())
       .then(result => {

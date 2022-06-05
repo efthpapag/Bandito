@@ -69,9 +69,9 @@ public class SearchBandAsEmployerManagement {
                     temp += rating.getRating();
                 }
 
-                float avgRating = temp/numOfRatings;
+                int avgRating = temp/numOfRatings;
 
-                if(maxRating < avgRating && minRating > avgRating && maxNumberOfMembers < band.getNumberOfPositions() && minNumberOfMembers > band.getNumberOfPositions()){    
+                if(maxRating > avgRating && minRating < avgRating && maxNumberOfMembers > band.getNumberOfPositions() && minNumberOfMembers < band.getNumberOfPositions()){    
 
                     ArrayList<MusicGenre> musicGennreList = new ArrayList<>();
                     musicGennreList.addAll(band.getMusicGenres());

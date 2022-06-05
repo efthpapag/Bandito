@@ -79,9 +79,9 @@ public class SearchBandPositionAsMusicianManagement {
                     temp += rating.getRating();
                 }
 
-                float avgRating = temp/numOfRatings;
+                int avgRating = temp/numOfRatings;
 
-                if(maxRating < avgRating && minRating > avgRating && maxNumberOfMembers < band.getNumberOfPositions() && minNumberOfMembers > band.getNumberOfPositions()){    
+                if(maxRating > avgRating && minRating < avgRating && maxNumberOfMembers > band.getNumberOfPositions() && minNumberOfMembers < band.getNumberOfPositions()){    
 
                     //Calculate average band member age
                     temp = 0;
@@ -95,7 +95,7 @@ public class SearchBandPositionAsMusicianManagement {
 
                     int avgAge = temp/band.getNumberOfPositions();
 
-                    if(avgAge < minAvgAge && avgAge > maxAvgAge){
+                    if(avgAge > minAvgAge && avgAge < maxAvgAge){
 
 
                         //Calculate average band member experience
@@ -116,7 +116,7 @@ public class SearchBandPositionAsMusicianManagement {
 
                         int avgExperience = temp/band.getNumberOfPositions();
 
-                        if(avgExperience < minAvgYearsOfExperience && avgExperience > maxAvgYearsOfExperience){
+                        if(avgExperience > minAvgYearsOfExperience && avgExperience < maxAvgYearsOfExperience){
                     
                             ArrayList<MusicGenre> musicGennreList = new ArrayList<>();
                             musicGennreList.addAll(band.getMusicGenres());
