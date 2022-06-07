@@ -113,14 +113,14 @@ public class BandtitoApplication {
         //userManagement.createEmployer("employer g", "a", "a", "a", "a");
 
 
-        instrumentInitializer.init();
+        /*instrumentInitializer.init();
         System.out.println("--------------------------------------------");
         musicGenresInitializer.init();
         System.out.println("--------------------------------------------");
         musiciansInitializer.init();
         System.out.println("--------------------------------------------");
         bandInitializer.init();
-        System.out.println("--------------------------------------------");
+        System.out.println("--------------------------------------------");*/
         
 
         //test
@@ -162,16 +162,16 @@ public class BandtitoApplication {
         //musician = new Musician("musician d", "firstname d", "lastname d", "password d", "address d", 50, musicGenresSet);
         //UserRepo.save(musician);
 
-        userManagement.createMusician("SteveCook", "Steve", "Cook", "a", "Patision 20", 20, 
+        /*userManagement.createMusician("SteveCook", "Steve", "Cook", "a", "Patision 20", 20, 
         Arrays.asList("Saxophone"), Arrays.asList(2), Arrays.asList("Rock", "Pop"), "profile.jpg");
         userManagement.createMusician("AliceMcCarthy", "Alice", "McCarthy", "password b", "address b", 30, 
         Arrays.asList("Saxophone", "Guitar", "Voice", "Bass", "Piano", "Violin"), Arrays.asList(2,3,6,1,9,7), Arrays.asList("Rock", "Pop", "Jazz", "Country","Classical","Blues"), "b");
-        /*userManagement.createMusician("musician c", "firstname c", "lastname c", "password c", "address c", 40, 
-        Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"), "a");
-        userManagement.createMusician("musician d", "firstname d", "lastname d", "password d", "address d", 50, 
+        userManagement.createMusician("AlexMason", "Alex", "Mason", "password c", "address c", 40, 
+        Arrays.asList("Saxophone"), Arrays.asList(2), Arrays.asList("Rock", "Pop"), "a");
+        /*userManagement.createMusician("musician d", "firstname d", "lastname d", "password d", "address d", 50, 
         Arrays.asList("instument a"), Arrays.asList(2), Arrays.asList("musicGenre a", "musicGenre b"), "a");*/
 
-        System.out.println("create musicians");
+        //System.out.println("create musicians");
 
         //Add instuments to musician
         
@@ -180,20 +180,20 @@ public class BandtitoApplication {
         //yearsOfExperience = new YearsOfExperience(6, (Musician) UserRepo.findByUsername("musician a"), InstrumentRepo.findByName("instument b"));
         //YearsOfExperienceRepo.save(yearsOfExperience);
 
-        userManagement.addInstument(6, "SteveCook", "Voice");
+        /*userManagement.addInstument(6, "SteveCook", "Voice");
         userManagement.addInstument(2, "SteveCook", "Bass");
         userManagement.addInstument(10, "SteveCook", "Guitar");
         
-        System.out.println("add instuments");
+        System.out.println("add instuments");*/
 
         //create band
         
         //Band band = new Band("band a", "a", (Musician) UserRepo.findByUsername("musician a"), musicGenresSet, true);
         //BandRepo.save(band);
 
-        bandManagement.createBand("WonkyGuitars", "Omirou 14", "SteveCook", Arrays.asList("Rock", "Pop"), false, "a");
-
-        System.out.println("create band");
+        /*bandManagement.createBand("WonkyGuitars", "Omirou 14", "SteveCook", Arrays.asList("Rock", "Pop"), false, "a");
+        bandManagement.createBand("Predicaments", "Akadimias 5", "AlexMason", Arrays.asList("Rock", "Pop"), true, "a");
+        System.out.println("create band");*/
 
         //create band positions
 		
@@ -203,21 +203,22 @@ public class BandtitoApplication {
         //bandPosition = new BandPosition(InstrumentRepo.findByName("instument b"), BandRepo.findByName("band a"));
         //BandPositionRepo.save(bandPosition);
         
-        BandPosition b = bandManagement.createBandPosition("Saxophone", "WonkyGuitars");
+        /*BandPosition b = bandManagement.createBandPosition("Saxophone", "WonkyGuitars");
         String bandUuid = b.getUuid();
         BandPosition b2 = bandManagement.createBandPosition("Guitar", "WonkyGuitars");
         String uuid2 = b2.getUuid();
-
-        System.out.println("create band positions");
+        BandPosition b3 = bandManagement.createBandPosition("Saxophone", "Predicaments");
+        String uuid3 = b3.getUuid();
+        System.out.println("create band positions");*/
         
         //fill band position
         
         //BandPositionRepo.findByUuid(bandUuid).fillPossition((Musician) UserRepo.findByUsername("musician a"));
         //BandPositionRepo.save(bandPosition);
 
-        bandManagement.fillBandPosition(bandUuid, "SteveCook");
-
-        System.out.println("fill band position");
+        /*bandManagement.fillBandPosition(bandUuid, "SteveCook");
+        bandManagement.fillBandPosition(uuid3, "AlexMason");
+        System.out.println("fill band position");*/
 
         //create employers
         
@@ -226,10 +227,10 @@ public class BandtitoApplication {
         //employer = new Employer("employer b", "b", "b", "b");
         //UserRepo.save(employer);
 
-        userManagement.createEmployer("MarkOwen", "Mark", "Owen", "a", "profile.jpg");
+        //userManagement.createEmployer("MarkOwen", "Mark", "Owen", "a", "profile.jpg");
         //userManagement.createEmployer("employer b", "b", "b", "b", "a");
 
-        System.out.println("create employers");
+        //System.out.println("create employers");
 
         //create job
         
@@ -263,9 +264,10 @@ public class BandtitoApplication {
         //Rating rating = new Rating(5, BandRepo.findByName("band a"), (Employer) UserRepo.findByUsername("employer a"));
         //RatingRepo.save(rating);
 
-        bandManagement.rateBand("MarkOwen", "WonkyGuitars", 5);
+        /*bandManagement.rateBand("MarkOwen", "WonkyGuitars", 5);
+        bandManagement.rateBand("MarkOwen", "Predicaments", 4);
 
-        System.out.println("rate band");
+        System.out.println("rate band");*/
 
 
         
@@ -332,7 +334,7 @@ public class BandtitoApplication {
 
         List<String> listOfGenres = Arrays.asList("Rock");
         Band band = BandRepo.findByName("WonkyGuitars");
-        ArrayList<String> musiciansSorted = searchMusicianManagement.searchForMusician("SteveCook",band.getAddress(), listOfGenres, b2.getInstument().getName(), 60, 4000, 400, 400, -1, -1, -1, -1);
+        ArrayList<String> musiciansSorted = searchMusicianManagement.searchForMusician("SteveCook",band.getAddress(), listOfGenres, "Guitar", 60, 4000, 400, 400, -1, -1, -1, -1);
         if(!musiciansSorted.isEmpty()){
             for(int i=0;i<musiciansSorted.size();i++){
                 Musician musician = (Musician) UserRepo.findByUsername(musiciansSorted.get(i));
@@ -340,7 +342,7 @@ public class BandtitoApplication {
                 Iterator<YearsOfExperience> it1 = musician.getYearsOfExperience().iterator();
                 while(it1.hasNext()){
                     YearsOfExperience yearsOfExperience = it1.next();
-                    if (yearsOfExperience.getInstument().equals(b2.getInstument().getName())){
+                    if (yearsOfExperience.getInstument().getName().equals("Guitar")){
                         years = yearsOfExperience.getNumberOfYears();
                         break;
                     }
@@ -421,11 +423,12 @@ public class BandtitoApplication {
                     }
 
                     int avgAge = temp/band.getNumberOfPositions();
-                System.out.println("BandUUid: "+bandPosition.getUuid()+" BandName: "+ band.getName()+" AvergaeAge: "+avgAge+" avgRating: "+ avgRating+" averageExperience: "+ avgExperience +"numberOfPositions: "+band.getNumberOfPositions());
+                System.out.println("BandUUid: "+bandPosition.getUuid()+" BandName: "+ band.getName()+" AvergaeAge: "+avgAge+" avgRating: "+ avgRating+" averageExperience: "+ avgExperience +" numberOfPositions: "+band.getNumberOfPositions());
             }
         }
         else{
             System.out.println("No match");
         }
+        System.out.println("--------------------------------------------");
     }
 }

@@ -70,7 +70,7 @@ public class BandInitializer {
         }
 
         //create full bands
-        for(int j = 0; j < 10; j++){
+        for(int j = 0; j < 15; j++){
 
             String name = bandnames.get(j);
             
@@ -168,7 +168,7 @@ public class BandInitializer {
         }
 
         //create empty bands
-        for(int j = 0; j < 10; j++){
+        for(int j = 0; j < 15; j++){
 
             String name = bandnames.get(j);
             

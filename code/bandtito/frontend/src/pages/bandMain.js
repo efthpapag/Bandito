@@ -307,7 +307,7 @@ const BandMain = () => {
                               <Icon.ArrowRightCircle className="text-warning fs-2" />
                           </Button>
                           </td>
-                          <td>Joe Biden</td>
+                          <td>SteveCook</td>
                           <td>Voice</td>
                           <td></td>
                           <td>
@@ -323,7 +323,7 @@ const BandMain = () => {
                               </Button>    
                           </td>
                           <td>-----</td>
-                          <td>Piano</td>
+                          <td>Guitar</td>
                           <td>
                               <Button className="d-flex" variant="primary" style={{ padding:0, marginTop: "1rem", marginBottom: "1rem"}}>
                                   <Icon.Search className="text-secondary fs-2" />

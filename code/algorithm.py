@@ -28,7 +28,7 @@ def findSimilar():
     u=0
     for i in allVectors:
         similarity=spatial.distance.cosine(vector,i)
-        allSimilarities[allUsers[u]] = math.log(similarity)
+        allSimilarities[allUsers[u]] = similarity
         u+=1
     sortedSimilarities={k: v for k, v in sorted(allSimilarities.items(), key=lambda item: item[1])}
     #print(sortdict)
