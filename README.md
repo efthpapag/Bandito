@@ -2,7 +2,11 @@
  
 ## Discription 
 
-A social networking application with the purpose to help musicians form bands and bands connect with employers.  
+A social networking application with the purpose to help musicians form bands and bands connect with employers.<br />
+
+Users can create a profile with their personal info. The type of information that a user must provide changes based on whether the user is a musician or potential employer. Musicians can create bands that have specific positions. This positions can be filled with musicians that are recommended to the band admin based on their preferences. If a musician wishes to join an existing band instead of creating a new one then the app recommends them band positions that are suitable for them. An employer can create jobs with specific requirements and then search for bands to hire. All searches take into account the choices that the person who conducts that search has made (ex. the musicians that an admin has contacted, the bands that an employer has contacted etc.) and returns similar results to their previous choices.
+
+
 
 ## Use Cases
 
